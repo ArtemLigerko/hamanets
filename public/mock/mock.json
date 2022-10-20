@@ -1,0 +1,35 @@
+[
+  {
+    "username": "artlee",
+    "id": "id1",
+    "capital": {
+      "total": 10000,
+      "wallets": [
+        {
+          "walletName": "card",
+          "total": 1000,
+          "transactions": [
+            {
+              "createdAt": "20.10.2022",
+              "type": "витрати",
+              "category": "продукти",
+              "total": -100
+            }
+          ]
+        },
+        {
+          "walletName": "cash",
+          "total": 500,
+          "transactions": [
+            {
+              "createdAt": "20.10.2022",
+              "type": "витрати",
+              "category": "комунальні платежі",
+              "total": 500
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
