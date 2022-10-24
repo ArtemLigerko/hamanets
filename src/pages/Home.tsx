@@ -1,46 +1,60 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { UserInterface } from "../types";
+import React, { useEffect } from "react";
+import { Button } from "react-bootstrap";
 
-const initialState = {
-  username: "",
-  id: "",
-  capital: {
-    total: 0,
-    wallets: [],
-  },
-};
+import WalletsConrainer from "../containers/WalletsConrainer";
+import Wallet from "../components/Wallet";
 
-const Home = () => {
-  const [user, setUser] = useState<UserInterface>(initialState);
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { userActions } from "../redux/reducers/user";
+// import { useDispatch, useSelector } from "react-redux";
+// import { AppDispatch, RootState } from "../redux/store";
 
-  const url = "/mock/mock.json";
+const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-  const getData = async () => {
-    const response = await axios.get(url);
-    setUser(response.data[0]);
-  };
+  // const dispatch = useDispatch<AppDispatch>();
+  // const user = useSelector<RootState, RootState["rootReducer"]["user"]>(
+  //   (store) => store.rootReducer.user
+  // );
 
   useEffect(() => {
-    getData();
-  }, []);
+    // getUser();
+    dispatch(userActions.getUser());
+    console.log("Effect");
+  }, [dispatch]);
 
+  const user = useAppSelector((store) => store.user);
+
+  const handleClick = async () => {
+    await dispatch(userActions.getUser());
+    console.log("onClick");
+    console.log(user);
+  };
+
+  console.log("onRenedr");
   console.log(user);
 
   return (
     <>
-      <div>Користувач: {user.username}</div>
-      <div>Капітал всього: {user.capital.total}</div>
-      <div>Гаманець: {user.capital.wallets[0].walletName}</div>
-      <div>Всього в гаманці: {user.capital.wallets[0].total}</div>
-      <div>
-        Дата транзакції: {user.capital.wallets[0].transactions[0].createdAt}
-      </div>
-      <div>Тип транзакції: {user.capital.wallets[0].transactions[0].type}</div>
-      <div>
-        Категорія транзакції: {user.capital.wallets[0].transactions[0].category}
-      </div>
-      <div>Витрати: {user.capital.wallets[0].transactions[0].total}</div>
+      <WalletsConrainer>
+        <Wallet />
+        <Button onClick={handleClick}>Fetch</Button>
+        <div>Користувач: {user.username}</div>
+        {/* <div>Капітал всього: {user.capital.total}</div>
+        <div>Гаманець: {user.capital.wallets[0]?.walletName}</div>
+        <div>Всього в гаманці: {user.capital.wallets[0]?.total}</div>
+        <div>
+          Дата транзакції: {user.capital.wallets[0]?.transactions[0].createdAt}
+        </div>
+        <div>
+          Тип транзакції: {user.capital.wallets[0]?.transactions[0].type}
+        </div>
+        <div>
+          Категорія транзакції:
+          {user.capital.wallets[0]?.transactions[0]?.category}
+        </div>
+        <div>Витрати: {user.capital.wallets[0]?.transactions[0].sum}</div> */}
+      </WalletsConrainer>
     </>
   );
 };

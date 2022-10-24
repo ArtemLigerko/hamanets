@@ -1,27 +1,33 @@
-export interface UserInterface {
+export interface User {
   username: string;
   id: string;
   capital: {
-    wallets: WalletInterface[];
-    total?: number;
+    wallets: Wallet[];
+    total: number;
   };
 }
 
-interface WalletInterface {
-  walletName?: string;
-  total?: number;
-  transactions: TransactionsInterface[];
+interface Wallet {
+  walletName: string;
+  total: number;
+  transactions: Transactions[];
 }
 
-interface TransactionsInterface {
-  createdAt?: string;
-  type?: "витрати" | "прибуток";
-  category?:
+interface Transactions {
+  createdAt: string;
+  type: "витрати" | "прибуток";
+  category:
     | "продукти"
     | "комунальні послуги"
     | "одежа"
     | "обув"
     | "гігієна"
-    | "побутова хімія";
-  total?: number;
+    | "побутова хімія"
+    | "";
+  sum: number;
 }
+
+export type LE<T> = T & {
+  isLoading?: boolean;
+  error?: string | Error;
+};
