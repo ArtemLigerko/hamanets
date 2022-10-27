@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-// import { Button } from "react-bootstrap";
+// import React, { useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 import WalletsConrainer from "../containers/WalletsConrainer";
 import Wallet from "../components/Wallet";
@@ -11,20 +11,20 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
 
-  useEffect(() => {
-    dispatch(userActions.getUser());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(userActions.getUser());
+  // }, [dispatch]);
 
-  // const handleClick = async () => {
-  //   await dispatch(userActions.getUser());
-  //   console.log("onClick");
-  //   console.log(user.isLoading ? "loading" : user);
-  // };
+  const handleClick = async () => {
+    await dispatch(userActions.getUser());
+    console.log("onClick");
+    console.log(user.isLoading ? "loading" : user);
+  };
 
   return (
     <WalletsConrainer>
       <Wallet />
-      {/* <Button onClick={handleClick}>Fetch</Button> */}
+      <Button onClick={handleClick}>Get user data</Button>
       <div>Користувач: {user.username}</div>
       <div>Капітал всього: {user.capital.total}</div>
       <div>Гаманець: {user.capital.wallets[0]?.walletName}</div>
