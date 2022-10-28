@@ -18,14 +18,14 @@
               "sum": -100
             },
             {
-              "id": "trid1",
+              "id": "trid2",
               "createdAt": "20.10.2022",
               "type": "витрати",
               "category": "продукти",
               "sum": -300
             },
             {
-              "id": "trid1",
+              "id": "trid3",
               "createdAt": "20.10.2022",
               "type": "витрати",
               "category": "продукти",
@@ -39,7 +39,7 @@
           "total": 500,
           "transactions": [
             {
-              "id": "trid2",
+              "id": "trid4",
               "createdAt": "20.10.2022",
               "type": "витрати",
               "category": "комунальні платежі",

@@ -3,11 +3,26 @@ import { User, LE } from "../../types";
 import axios from "axios";
 
 const initialState: LE<User> = {
-  username: "username",
+  username: "",
   id: "",
   capital: {
     total: 0,
-    wallets: [],
+    wallets: [
+      {
+        id: "",
+        walletName: "",
+        total: 0,
+        transactions: [
+          {
+            id: "",
+            createdAt: "",
+            type: "витрати",
+            category: "",
+            sum: 0,
+          },
+        ],
+      },
+    ],
   },
   isLoading: false,
   error: undefined,

@@ -1,14 +1,13 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { ChildrenProps } from "../types";
+import "./WalletContainer.scss";
 
-interface Props {
-  children: JSX.Element | JSX.Element[] | string | string[];
-}
-
-const WalletsConrainer = ({ children }: Props) => {
+const WalletsConrainer = ({ children }: ChildrenProps) => {
   return (
     <>
-      <Container>{children}</Container>
+      <header>Wallets:</header>
+      <Container className="walletContainer">{children}</Container>
     </>
   );
 };

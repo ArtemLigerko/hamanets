@@ -1,3 +1,7 @@
+export interface ChildrenProps {
+  children: JSX.Element | JSX.Element[] | string | string[];
+}
+
 export interface User {
   username: string;
   id: string;
@@ -8,12 +12,14 @@ export interface User {
 }
 
 interface Wallet {
+  id: string;
   walletName: string;
   total: number;
   transactions: Transactions[];
 }
 
 interface Transactions {
+  id: string;
   createdAt: string;
   type: "витрати" | "прибуток";
   category:
