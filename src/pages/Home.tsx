@@ -11,15 +11,20 @@ import TransactionBar from "../components/TransactionBar";
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user);
+  const user = useAppSelector((store) => store.user.userData.users[0]);
 
   // useEffect(() => {
   //   dispatch(userActions.getUser());
   // }, [dispatch]);
 
-  const handleClick = async () => {
+  const handleGetUserData = async () => {
     await dispatch(userActions.getUser());
-    console.log(user.isLoading ? "loading" : user);
+    // console.log(user.isLoading ? "loading" : user);
+  };
+
+  const handleChangeName = async () => {
+    await dispatch(userActions.editUsername("Artem"));
+    // console.log(user.isLoading ? "loading" : user);
   };
 
   return (
@@ -28,7 +33,8 @@ const Home: React.FC = () => {
         <span>Користувач: </span>
         <span>{user.username}</span>
       </header>
-      <Button onClick={handleClick}>Get user data</Button>
+      <Button onClick={handleGetUserData}>Get user data</Button>
+      <Button onClick={handleChangeName}>Change name</Button>
       <WalletsConrainer>
         <Wallet />
       </WalletsConrainer>

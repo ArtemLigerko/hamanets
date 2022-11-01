@@ -1,53 +1,55 @@
-[
-  {
-    "username": "artlee",
-    "id": "id1",
-    "capital": {
-      "total": 10000,
-      "wallets": [
-        {
-          "id": "wid1",
-          "walletName": "card",
-          "total": 1000,
-          "transactions": [
-            {
-              "id": "trid1",
-              "createdAt": "20.10.2022",
-              "type": "витрати",
-              "category": "продукти",
-              "sum": -100
-            },
-            {
-              "id": "trid2",
-              "createdAt": "20.10.2022",
-              "type": "витрати",
-              "category": "продукти",
-              "sum": -300
-            },
-            {
-              "id": "trid3",
-              "createdAt": "20.10.2022",
-              "type": "витрати",
-              "category": "продукти",
-              "sum": -500
-            }
-          ]
-        },
-        {
-          "id": "wid2",
-          "walletName": "cash",
-          "total": 500,
-          "transactions": [
-            {
-              "id": "trid4",
-              "createdAt": "20.10.2022",
-              "type": "витрати",
-              "category": "комунальні платежі",
-              "sum": -500
-            }
-          ]
-        }
-      ]
+{
+  "users": [
+    {
+      "username": "artlee",
+      "id": "id1",
+      "capital": {
+        "total": 10000,
+        "wallets": [
+          {
+            "id": "wid1",
+            "walletName": "card",
+            "total": 1000,
+            "transactions": [
+              {
+                "id": "trid1",
+                "createdAt": "20.10.2022",
+                "type": "витрати",
+                "category": "продукти",
+                "sum": -100
+              },
+              {
+                "id": "trid2",
+                "createdAt": "20.10.2022",
+                "type": "витрати",
+                "category": "продукти",
+                "sum": -300
+              },
+              {
+                "id": "trid3",
+                "createdAt": "20.10.2022",
+                "type": "витрати",
+                "category": "продукти",
+                "sum": -500
+              }
+            ]
+          },
+          {
+            "id": "wid2",
+            "walletName": "cash",
+            "total": 500,
+            "transactions": [
+              {
+                "id": "trid4",
+                "createdAt": "20.10.2022",
+                "type": "витрати",
+                "category": "комунальні платежі",
+                "sum": -500
+              }
+            ]
+          }
+        ]
+      }
     }
-  }
-]
+  ]
+}

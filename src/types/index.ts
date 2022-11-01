@@ -2,6 +2,10 @@ export interface ChildrenProps {
   children: JSX.Element | JSX.Element[] | string | string[];
 }
 
+export interface Users {
+  users: User[];
+}
+
 export interface User {
   username: string;
   id: string;

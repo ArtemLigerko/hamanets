@@ -4,7 +4,9 @@ import { useAppSelector } from "../redux/hooks";
 import "./Wallet.scss";
 
 const Wallet: React.FC = () => {
-  const wallets = useAppSelector((store) => store.user.capital.wallets);
+  const wallets = useAppSelector(
+    (store) => store.user.userData.users[0].capital.wallets
+  );
 
   return (
     <>
