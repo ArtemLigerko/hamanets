@@ -6,12 +6,12 @@ import { userActions } from "../redux/reducers/user";
 import WalletsContainer from "../containers/WalletsCotrainer";
 import Wallet from "../components/Wallet";
 import TransactionsContainer from "../containers/TransactionsContainer";
-import TransactionBar from "../components/TransactionBar";
+// import TransactionBar from "../components/TransactionBar";
 import TransactionTable from "../components/TransactionTable";
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user.userData.users[0]);
+  const user = useAppSelector((store) => store.user.userData);
 
   // useEffect(() => {
   //   dispatch(userActions.getUser());
@@ -22,10 +22,10 @@ const Home: React.FC = () => {
     // console.log(user.isLoading ? "loading" : user);
   };
 
-  const handleChangeName = async () => {
-    await dispatch(userActions.editUsername("Artem"));
-    // console.log(user.isLoading ? "loading" : user);
-  };
+  // const handleChangeName = async () => {
+  //   await dispatch(userActions.editUsername("Artem"));
+  //   // console.log(user.isLoading ? "loading" : user);
+  // };
 
   return (
     <>
@@ -34,12 +34,12 @@ const Home: React.FC = () => {
         <span>{user.username}</span>
       </header>
       <Button onClick={handleGetUserData}>Get user data</Button>
-      <Button onClick={handleChangeName}>Change name</Button>
+      {/* <Button onClick={handleChangeName}>Change name</Button> */}
       <WalletsContainer>
         <Wallet />
       </WalletsContainer>
       <TransactionsContainer>
-        <TransactionBar />
+        {/* <TransactionBar /> */}
         <TransactionTable />
       </TransactionsContainer>
     </>

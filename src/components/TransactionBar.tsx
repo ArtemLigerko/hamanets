@@ -1,19 +1,19 @@
 import React from "react";
-import { useAppSelector } from "../redux/hooks";
+// import { useAppSelector } from "../redux/hooks";
 
 const TransactionBar: React.FC = () => {
-  const wallets = useAppSelector(
-    (store) => store.user.userData.users[0].capital.wallets
-  );
-  const transactions = useAppSelector(
-    (store) => store.user.userData.users[0].capital.wallets[0].transactions
-  );
+  // const wallets = useAppSelector(
+  //   (store) => store.user.userData.users[0].capital.wallets
+  // );
+  // const transactions = useAppSelector(
+  //   (store) => store.user.userData.users[0].capital.wallets[0].transactions
+  // );
 
   // console.log(wallets);
 
   return (
     <>
-      {wallets.length ? (
+      {/* {wallets.length ? (
         transactions.map((transaction) => (
           <div className="transactionsCard" key={transaction.id}>
             <div className="transactionCard-info">
@@ -33,7 +33,7 @@ const TransactionBar: React.FC = () => {
         ))
       ) : (
         <div>No transactions</div>
-      )}
+      )} */}
     </>
   );
 };

@@ -10,9 +10,19 @@ import "./styles/reset.css";
 import "./styles/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import $ from "jquery";
+import "datatables.net";
+import "datatables.net-bs5";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+$(document).ready(function () {
+  $("#example").DataTable({
+    paging: true,
+  });
+});
 
 root.render(
   <React.StrictMode>

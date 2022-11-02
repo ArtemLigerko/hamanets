@@ -1,39 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Users, LE } from "../../types";
+import { User, LE } from "../../types";
 import axios from "axios";
 
-const initialState: LE<Users> = {
-  users: [
-    {
-      username: "",
-      id: "",
-      capital: {
+const initialState: LE<User> = {
+  username: "",
+  id: "",
+  capital: {
+    wallets: [
+      {
+        id: "",
+        walletName: "",
         total: 0,
-        wallets: [
-          {
-            id: "",
-            walletName: "",
-            total: 0,
-            transactions: [
-              {
-                id: "",
-                createdAt: "",
-                type: "витрати",
-                category: "",
-                sum: 0,
-              },
-            ],
-          },
-        ],
       },
-    },
-  ],
+    ],
+    transactions: [
+      {
+        id: "",
+        walletId: "",
+        createdAt: "",
+        type: "",
+        category: "",
+        sum: 0,
+      },
+    ],
+    total: 0,
+  },
   isLoading: false,
   error: undefined,
 };
 
 export interface UserStore {
-  userData: LE<Users>;
+  userData: LE<User>;
 }
 
 const userInitialState: UserStore = {
@@ -42,20 +39,20 @@ const userInitialState: UserStore = {
 
 const getUser = createAsyncThunk("home/getUser", async () => {
   const response = await axios.get("/mock/user.json");
-  console.log(response.data[0]);
-  return response.data[0];
+  console.log(response.data);
+  return response.data;
 });
 
-const editUsername = createAsyncThunk<any, string>(
-  "home/editUsername",
-  async (newUsername) => {
-    const response = await axios.put("/mock/user.json", {
-      username: newUsername,
-    });
-    // console.log(response.data[0]);
-    return response.data[0];
-  }
-);
+// const editUsername = createAsyncThunk<any, string>(
+//   "home/editUsername",
+//   async (newUsername) => {
+//     const response = await axios.put("/mock/user.json", {
+//       username: newUsername,
+//     });
+//     // console.log(response.data[0]);
+//     return response.data[0];
+//   }
+// );
 
 const userSlice = createSlice({
   name: "user",
@@ -74,24 +71,24 @@ const userSlice = createSlice({
       store.userData.error = "Помилка завантаження данних користувача";
     });
 
-    builder.addCase(editUsername.pending, (store) => {
-      store.userData.isLoading = true;
-    });
-    builder.addCase(editUsername.fulfilled, (store, { payload }) => {
-      store.userData.users[0].username = payload;
-      store.userData.isLoading = false;
-    });
-    builder.addCase(editUsername.rejected, (store) => {
-      store.userData.isLoading = false;
-      store.userData.error = "Помилка завантаження данних користувача";
-    });
+    // builder.addCase(editUsername.pending, (store) => {
+    //   store.userData.isLoading = true;
+    // });
+    // builder.addCase(editUsername.fulfilled, (store, { payload }) => {
+    //   store.userData.users[0].username = payload;
+    //   store.userData.isLoading = false;
+    // });
+    // builder.addCase(editUsername.rejected, (store) => {
+    //   store.userData.isLoading = false;
+    //   store.userData.error = "Помилка завантаження данних користувача";
+    // });
   },
 });
 
 export const userActions = {
   ...userSlice.actions,
   getUser,
-  editUsername,
+  // editUsername,
 };
 
 export default userSlice.reducer;
