@@ -1,7 +1,12 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { useAppSelector } from "../redux/hooks";
-import "./Wallet.scss";
+// import "./Wallet.scss";
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+  margin: 3px;
+`;
 
 const Wallet: React.FC = () => {
   const wallets = useAppSelector(
@@ -12,7 +17,7 @@ const Wallet: React.FC = () => {
     <>
       {wallets.length ? (
         wallets.map((wallet) => (
-          <Card
+          <StyledCard
             className="card"
             key={wallet.id}
             border="dark"
@@ -23,7 +28,7 @@ const Wallet: React.FC = () => {
               <Card.Title>{wallet.total}</Card.Title>
               <Card.Text>Якась інфа </Card.Text>
             </Card.Body>
-          </Card>
+          </StyledCard>
         ))
       ) : (
         <div>No wallets</div>

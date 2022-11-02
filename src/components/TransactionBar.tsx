@@ -1,6 +1,5 @@
 import React from "react";
 import { useAppSelector } from "../redux/hooks";
-import "./TransactionBar.scss";
 
 const TransactionBar: React.FC = () => {
   const wallets = useAppSelector(

@@ -5,7 +5,10 @@ import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 import App from "./App";
-import "./index.css";
+
+import "./styles/reset.css";
+import "./styles/global.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

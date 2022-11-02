@@ -1,13 +1,13 @@
 // import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 
-import WalletsConrainer from "../containers/WalletsConrainer";
-import Wallet from "../components/Wallet";
-
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { userActions } from "../redux/reducers/user";
+import WalletsContainer from "../containers/WalletsCotrainer";
+import Wallet from "../components/Wallet";
 import TransactionsContainer from "../containers/TransactionsContainer";
 import TransactionBar from "../components/TransactionBar";
+import TransactionTable from "../components/TransactionTable";
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,11 +35,12 @@ const Home: React.FC = () => {
       </header>
       <Button onClick={handleGetUserData}>Get user data</Button>
       <Button onClick={handleChangeName}>Change name</Button>
-      <WalletsConrainer>
+      <WalletsContainer>
         <Wallet />
-      </WalletsConrainer>
+      </WalletsContainer>
       <TransactionsContainer>
         <TransactionBar />
+        <TransactionTable />
       </TransactionsContainer>
     </>
   );

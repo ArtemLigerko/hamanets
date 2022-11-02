@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { ChildrenProps } from "../types";
-import "./TransactionsContainer.scss";
 
 const TransactionsContainer = ({ children }: ChildrenProps) => {
   return (
