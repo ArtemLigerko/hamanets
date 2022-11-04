@@ -26,33 +26,33 @@ const TransactionTable: React.FC = () => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <table id="example" className="table table-striped">
-            <thead>
-              <tr>
-                <th>Дата</th>
-                <th>Тип операції</th>
-                <th>Рахунок</th>
-                <th>Стаття</th>
-                <th>Сума</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.map((transaction) => {
-                return (
-                  <tr key={transaction.id}>
-                    <td>{transaction.createdAt}</td>
-                    <td>{transaction.type}</td>
-                    <td>{getWalletName(transaction.walletId)}</td>
-                    <td>{transaction.category}</td>
-                    <td>{transaction.sum}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </Row>
+      <Container className="sx">
+        {/* <Row> */}
+        <table id="transactions" className="table table-striped">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Тип операції</th>
+              <th>Рахунок</th>
+              <th>Стаття</th>
+              <th>Сума</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((transaction) => {
+              return (
+                <tr key={transaction.id}>
+                  <td>{transaction.createdAt}</td>
+                  <td>{transaction.type}</td>
+                  <td>{getWalletName(transaction.walletId)}</td>
+                  <td>{transaction.category}</td>
+                  <td>{transaction.sum}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        {/* </Row> */}
       </Container>
     </>
   );

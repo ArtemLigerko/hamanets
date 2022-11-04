@@ -1,12 +1,15 @@
-import Home from "./pages/Home";
+import EnhancedTable from "./components/EnhancedTable";
+import TransactionTable from "./components/TransactionTable";
+import Layout from "./pages/Layout";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header>
-        <Home />
-      </header>
-    </div>
+    <>
+      <Layout>
+        <EnhancedTable />
+        {/* <TransactionTable /> */}
+      </Layout>
+    </>
   );
 };
 

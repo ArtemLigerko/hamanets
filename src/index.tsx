@@ -18,9 +18,10 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-$(document).ready(function () {
-  $("#example").DataTable({
+$(document).ready(() => {
+  $("#transactions").DataTable({
     paging: true,
+    // pagingType: "scrolling",
   });
 });
 

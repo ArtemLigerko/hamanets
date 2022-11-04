@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { userActions } from "../redux/reducers/user";
 import WalletsContainer from "../containers/WalletsCotrainer";
 import Wallet from "../components/Wallet";
-import TransactionsContainer from "../containers/TransactionsContainer";
+// import TransactionsContainer from "../containers/TransactionsContainer";
 // import TransactionBar from "../components/TransactionBar";
 import TransactionTable from "../components/TransactionTable";
 
@@ -17,8 +17,8 @@ const Home: React.FC = () => {
   //   dispatch(userActions.getUser());
   // }, [dispatch]);
 
-  const handleGetUserData = async () => {
-    await dispatch(userActions.getUser());
+  const handleGetUserData = () => {
+    dispatch(userActions.getUser());
     // console.log(user.isLoading ? "loading" : user);
   };
 
@@ -33,15 +33,15 @@ const Home: React.FC = () => {
         <span>Користувач: </span>
         <span>{user.username}</span>
       </header>
-      <Button onClick={handleGetUserData}>Get user data</Button>
+      {/* <Button onClick={handleGetUserData}>Get user data</Button> */}
       {/* <Button onClick={handleChangeName}>Change name</Button> */}
       <WalletsContainer>
         <Wallet />
       </WalletsContainer>
-      <TransactionsContainer>
-        {/* <TransactionBar /> */}
-        <TransactionTable />
-      </TransactionsContainer>
+      {/* <TransactionsContainer> */}
+      {/* <TransactionBar /> */}
+      <TransactionTable />
+      {/* </TransactionsContainer> */}
     </>
   );
 };
