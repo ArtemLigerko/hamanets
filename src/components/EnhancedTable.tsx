@@ -12,15 +12,16 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Switch from " @mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { useAppSelector } from "../redux/hooks";
+import Pagination from "@mui/material/Pagination";
 
 interface Data {
   id: string;
@@ -283,7 +284,7 @@ export default function EnhancedTable() {
     )
   );
 
-  console.log(rows);
+  // console.log(rows);
 
   // const rows = [
   //   createData("1", "01.03.2022", "Прибуток", "Готівка", "Обув", 100),
@@ -350,7 +351,7 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper elevation={5} sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         {/* <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
@@ -428,7 +429,7 @@ export default function EnhancedTable() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 20, 50]}
+          rowsPerPageOptions={[10, 20, 50, { value: -1, label: "All" }]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ToolsPanel from "../components/ToolsPanel";
 import MainMenu from "../components/MainMenu";
 import LeftMenuPanel from "../components/LeftMenuPanel";
+import NavBar from "../components/NavBar";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -47,7 +48,8 @@ const Layout = ({ children }: ChildrenProps) => {
     <>
       <Window>
         {/* <LeftMenuPanel /> */}
-        <MainMenu />
+        <NavBar />
+        {/* <MainMenu /> */}
         <ToolsPanel />
         <Middle>
           <LeftMenu>
