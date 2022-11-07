@@ -1,15 +1,20 @@
-import EnhancedTable from "./components/EnhancedTable";
-import TransactionTable from "./components/TransactionTable";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
-// import { Routes, Route } from "react-router-dom";
+import EnhancedTable from "./components/EnhancedTable";
+import NotFound404 from "./components/NotFound404";
+// import Home from "./pages/Home";
 
 const App: React.FC = () => {
   return (
     <>
-      <Layout>
-        <EnhancedTable />
-        {/* <TransactionTable /> */}
-      </Layout>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<EnhancedTable />} />
+            <Route path="*" element={<NotFound404 />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };

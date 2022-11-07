@@ -5,6 +5,7 @@ import ToolsPanel from "../components/ToolsPanel";
 import MainMenu from "../components/MainMenu";
 import LeftMenuPanel from "../components/LeftMenuPanel";
 import NavBar from "../components/NavBar";
+import { Outlet } from "react-router-dom";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -43,20 +44,21 @@ const Footer = styled.header`
   height: 40px;
 `;
 
-const Layout = ({ children }: ChildrenProps) => {
+const Layout: React.FC<ChildrenProps> = () => {
   return (
     <>
       <Window>
-        {/* <LeftMenuPanel /> */}
         <NavBar />
-        {/* <MainMenu /> */}
         <ToolsPanel />
         <Middle>
           <LeftMenu>
             <Calendar>Calendar</Calendar>
             <Filters>Filters</Filters>
           </LeftMenu>
-          <main>{children}</main>
+          {/* <main>{children}</main> */}
+          <main>
+            <Outlet />
+          </main>
         </Middle>
         <Footer>footer</Footer>
       </Window>

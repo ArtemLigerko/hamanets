@@ -1,5 +1,5 @@
 export interface ChildrenProps {
-  children: JSX.Element | JSX.Element[] | string | string[];
+  children?: JSX.Element | JSX.Element[] | string | string[];
 }
 
 // export interface Users {
