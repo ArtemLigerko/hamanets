@@ -1,11 +1,11 @@
 import React from "react";
 import { ChildrenProps } from "../types";
 import styled from "styled-components";
-import ToolsPanel from "../components/ToolsPanel";
-import MainMenu from "../components/MainMenu";
-import LeftMenuPanel from "../components/LeftMenuPanel";
 import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
+import ToolsContainer from "../containers/ToolsContainer";
+import TransactionsTools from "../components/TransactionsTools";
+import WalletTools from "../components/WalletTools";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -13,11 +13,19 @@ const Window = styled.div`
   height: 100vh;
 `;
 
-const Middle = styled.div`
+const Main = styled.div`
   /* background-color: white; */
   display: flex;
   width: 100%;
   height: calc(100vh - 40px - 40px - 40px);
+`;
+
+const Center = styled.div`
+  background-color: #d4d4d4;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* height: calc(100vh - 40px - 40px - 40px); */
 `;
 
 const LeftMenu = styled.div`
@@ -49,17 +57,21 @@ const Layout: React.FC<ChildrenProps> = () => {
     <>
       <Window>
         <NavBar />
-        <ToolsPanel />
-        <Middle>
+        <Main>
           <LeftMenu>
             <Calendar>Calendar</Calendar>
             <Filters>Filters</Filters>
           </LeftMenu>
-          {/* <main>{children}</main> */}
-          <main>
-            <Outlet />
-          </main>
-        </Middle>
+          <Center>
+            {/* <ToolsContainer>
+              <TransactionsTools />
+              <WalletTools />
+            </ToolsContainer> */}
+            <main>
+              <Outlet />
+            </main>
+          </Center>
+        </Main>
         <Footer>footer</Footer>
       </Window>
     </>

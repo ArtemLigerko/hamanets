@@ -9,13 +9,12 @@ const StyledContainer = styled(Container)`
   padding: 10px;
 `;
 
-const WalletsContainer = ({ children }: ChildrenProps) => {
+const DataContainer = ({ children }: ChildrenProps) => {
   return (
     <>
-      <header>Wallets:</header>
-      <StyledContainer className="walletContainer">{children}</StyledContainer>
+      <StyledContainer>{children}</StyledContainer>
     </>
   );
 };
 
-export default WalletsContainer;
+export default DataContainer;

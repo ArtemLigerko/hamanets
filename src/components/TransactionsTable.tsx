@@ -21,7 +21,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { useAppSelector } from "../redux/hooks";
-import Pagination from "@mui/material/Pagination";
 
 interface Data {
   id: string;
@@ -201,7 +200,7 @@ interface EnhancedTableToolbarProps {
   numSelected: number;
 }
 
-function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
+const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
   const { numSelected } = props;
 
   return (
@@ -252,11 +251,11 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       )}
     </Toolbar>
   );
-}
+};
 
-export default function EnhancedTable() {
+export default function TransactionsTable() {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("sum");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("date");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -339,9 +338,9 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDense(event.target.checked);
-  };
+  // const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setDense(event.target.checked);
+  // };
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
@@ -350,16 +349,18 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ maxWidth: 1024 }}>
       <Paper elevation={5} sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         {/* <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
           label="Dense padding"
         /> */}
-        <TableContainer>
+        <TableContainer sx={{ maxHeight: 600 }}>
           <Table
-            sx={{ minWidth: 750 }}
+            stickyHeader
+            aria-label="sticky table"
+            // sx={{ maxWidth: 750 }}
             aria-labelledby="tableTitle"
             // size={dense ? "small" : "medium"}
             size={"small"}
