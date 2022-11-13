@@ -7,6 +7,7 @@ import WalletTools from "./components/WalletTools";
 import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import TransactionsTools from "./components/TransactionsTools";
+import SpendingInputForm from "./components/SpendingForm";
 // import Home from "./pages/Home";
 
 const App: React.FC = () => {

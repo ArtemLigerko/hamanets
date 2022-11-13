@@ -21,6 +21,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { useAppSelector } from "../redux/hooks";
+import styled from "styled-components";
+
+// const StyledTablePagination = styled(TablePagination)`
+//   display: flex;
+// `;
 
 interface Data {
   id: string;

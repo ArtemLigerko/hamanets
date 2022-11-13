@@ -3,9 +3,6 @@ import { ChildrenProps } from "../types";
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
-import ToolsContainer from "../containers/ToolsContainer";
-import TransactionsTools from "../components/TransactionsTools";
-import WalletTools from "../components/WalletTools";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -63,10 +60,6 @@ const Layout: React.FC<ChildrenProps> = () => {
             <Filters>Filters</Filters>
           </LeftMenu>
           <Center>
-            {/* <ToolsContainer>
-              <TransactionsTools />
-              <WalletTools />
-            </ToolsContainer> */}
             <main>
               <Outlet />
             </main>
