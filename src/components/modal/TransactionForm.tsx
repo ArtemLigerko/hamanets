@@ -44,7 +44,7 @@ interface ISpendingForm {
 //   })
 //   .required();
 
-const SpendingForm = ({ title, button, isSpend }: ISpendingForm) => {
+const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   const { register, handleSubmit, reset } = useForm<IFormInput>({
     // resolver: yupResolver(schema),
   });
@@ -100,4 +100,4 @@ const SpendingForm = ({ title, button, isSpend }: ISpendingForm) => {
   );
 };
 
-export default SpendingForm;
+export default TransactionForm;
