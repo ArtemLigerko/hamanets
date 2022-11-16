@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
-import { categoryList } from "../lists";
-import { useAppSelector } from "../redux/hooks";
-import { localDateTime, localDate, localTime } from "../services/localDateTime";
+import { revenueCategoryList, spendCategoryList } from "../../lists";
+import { useAppSelector } from "../../redux/hooks";
+import { localDate } from "../../services/localDateTime";
 import ModalUniversal from "./ModalUniversal";
 
 const StyledForm = styled.form`
@@ -22,25 +22,36 @@ const Select = styled.select`
   margin: 0 0 10px 0;
 `;
 
-enum CategoryEnum {
-  foods = "продукти",
-  utilities = "комунальні послуги",
-  clothes = "одежа",
-  shoes = "обув",
-  hygiene = "гігієна",
-  chemicals = "побутова хімія",
-}
-
 interface IFormInput {
-  date: string | any;
+  date: string | Date;
   account: string;
-  category: CategoryEnum;
+  category: string;
   sum: number;
 }
 
-const SpendingForm = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+interface ISpendingForm {
+  title: string;
+  button: string;
+  isSpend: boolean;
+}
+
+// const schema = yup
+//   .object({
+//     date: yup
+//       .string()
+//       .required("Please, enter a valid date")
+//     sum: yup.number().required("Enter sum"),
+//   })
+//   .required();
+
+const SpendingForm = ({ title, button, isSpend }: ISpendingForm) => {
+  const { register, handleSubmit, reset } = useForm<IFormInput>({
+    // resolver: yupResolver(schema),
+  });
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
+    // reset();
+  };
 
   const wallets = useAppSelector(
     (store) => store.user.userData.capital.wallets
@@ -50,9 +61,8 @@ const SpendingForm = () => {
 
   const SpendingFormBody = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <div>Введіть витрати</div>
       <Label>Дата</Label>
-      <Input {...register("date")} value={localDate} />
+      <Input {...register("date")} defaultValue={localDate} />
 
       <Label>Рахунок</Label>
       <Select {...register("account")}>
@@ -63,9 +73,13 @@ const SpendingForm = () => {
 
       <Label>Стаття</Label>
       <Select {...register("category")}>
-        {categoryList.map((category) => {
-          return <option key={i++}>{category}</option>;
-        })}
+        {isSpend
+          ? spendCategoryList.map((category) => {
+              return <option key={i++}>{category}</option>;
+            })
+          : revenueCategoryList.map((category) => {
+              return <option key={i++}>{category}</option>;
+            })}
       </Select>
 
       <Label>Сума</Label>
@@ -78,8 +92,8 @@ const SpendingForm = () => {
   return (
     <>
       <ModalUniversal
-        title="Введіть витрати"
-        button="Add Spend"
+        title={title}
+        button={button}
         content={SpendingFormBody}
       />
     </>

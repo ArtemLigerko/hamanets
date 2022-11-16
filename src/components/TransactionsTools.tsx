@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useAppDispatch } from "../redux/hooks";
 import { userActions } from "../redux/reducers/user";
 import Button from "@mui/material/Button";
-import SpendingForm from "./SpendingForm";
+import SpendingForm from "./modal/SpendingForm";
 
 export const StyledButton = styled(Button)`
   margin: 0 5px !important;
@@ -19,9 +19,21 @@ const TransactionsTools = () => {
   return (
     <>
       <StyledButton variant="contained" onClick={handleGetUserData}>
-        Get user data
+        Завантажити дані
       </StyledButton>
-      <SpendingForm />
+      <StyledButton variant="contained" onClick={handleGetUserData}>
+        Видалити дані
+      </StyledButton>
+      <SpendingForm
+        title="Введіть витрати"
+        button="Додати витрати"
+        isSpend={true}
+      />
+      <SpendingForm
+        title="Введіть прибуток"
+        button="Додати прибуток"
+        isSpend={false}
+      />
     </>
   );
 };

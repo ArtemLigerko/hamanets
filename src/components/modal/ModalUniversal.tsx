@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { StyledButton } from "./TransactionsTools";
+import { StyledButton } from "../TransactionsTools";
 
 interface ModalProps {
   button?: string | JSX.Element;
