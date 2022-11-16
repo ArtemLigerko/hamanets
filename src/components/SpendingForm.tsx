@@ -1,8 +1,9 @@
-import ReactDOM from "react-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
+import { categoryList } from "../lists";
+import { useAppSelector } from "../redux/hooks";
+import { localDateTime, localDate, localTime } from "../services/localDateTime";
 import ModalUniversal from "./ModalUniversal";
-import { StyledButton } from "./TransactionsTools";
 
 const StyledForm = styled.form`
   display: flex;
@@ -22,8 +23,12 @@ const Select = styled.select`
 `;
 
 enum CategoryEnum {
-  clothes = "Одежа",
-  foods = "Продукти",
+  foods = "продукти",
+  utilities = "комунальні послуги",
+  clothes = "одежа",
+  shoes = "обув",
+  hygiene = "гігієна",
+  chemicals = "побутова хімія",
 }
 
 interface IFormInput {
@@ -33,34 +38,40 @@ interface IFormInput {
   sum: number;
 }
 
-// const newDate = new Date();
-
 const SpendingForm = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
-  const SpendingFormContainer = (
+  const wallets = useAppSelector(
+    (store) => store.user.userData.capital.wallets
+  );
+
+  let i = 0;
+
+  const SpendingFormBody = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <div>Введіть витрати</div>
       <Label>Дата</Label>
-      <Input {...register("date")} />
+      <Input {...register("date")} value={localDate} />
 
       <Label>Рахунок</Label>
       <Select {...register("account")}>
-        <option value="Картка">Картка</option>
-        <option value="Готівка">Готівка</option>
+        {wallets.map((wallet: any) => {
+          return <option key={wallet.id}>{wallet.walletName}</option>;
+        })}
       </Select>
 
       <Label>Стаття</Label>
       <Select {...register("category")}>
-        <option>Одежа</option>
-        <option>Продукти</option>
+        {categoryList.map((category) => {
+          return <option key={i++}>{category}</option>;
+        })}
       </Select>
 
       <Label>Сума</Label>
       <Input {...register("sum")} />
 
-      <Input type="submit" />
+      <Input type="submit" value="Зберегти" />
     </StyledForm>
   );
 
@@ -69,7 +80,7 @@ const SpendingForm = () => {
       <ModalUniversal
         title="Введіть витрати"
         button="Add Spend"
-        content={SpendingFormContainer}
+        content={SpendingFormBody}
       />
     </>
   );

@@ -7,6 +7,7 @@ interface ModalProps {
   button?: string | JSX.Element;
   title?: string;
   content?: JSX.Element | null;
+  footer?: JSX.Element | null;
   // toggleClose?: () => void;
 }
 
@@ -14,7 +15,8 @@ const ModalUniversal = ({
   button,
   title,
   content,
-}: // showState
+}: // footer,
+// showState
 ModalProps) => {
   const [show, setShow] = useState(false);
 
@@ -33,14 +35,6 @@ ModalProps) => {
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{content}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
