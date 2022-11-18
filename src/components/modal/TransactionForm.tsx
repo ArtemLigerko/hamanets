@@ -1,8 +1,11 @@
+import { nanoid } from "@reduxjs/toolkit";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import { revenueCategoryList, spendCategoryList } from "../../lists";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { userActions } from "../../redux/reducers/user";
 import { localDate } from "../../services/localDateTime";
+import { ITransactions } from "../../types";
 import ModalUniversal from "./ModalUniversal";
 
 const StyledForm = styled.form`
@@ -22,12 +25,12 @@ const Select = styled.select`
   margin: 0 0 10px 0;
 `;
 
-interface IFormInput {
-  date: string | Date;
-  account: string;
-  category: string;
-  sum: number;
-}
+// interface IFormInput {
+//   createdAt: string | Date;
+//   walletId: string;
+//   category: string;
+//   sum: number;
+// }
 
 interface ISpendingForm {
   title: string;
@@ -45,27 +48,49 @@ interface ISpendingForm {
 //   .required();
 
 const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
-  const { register, handleSubmit, reset } = useForm<IFormInput>({
+  const { register, handleSubmit, reset } = useForm<ITransactions>({
     // resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    // reset();
-  };
+
+  const dispatch = useAppDispatch();
 
   const wallets = useAppSelector(
     (store) => store.user.userData.capital.wallets
   );
+
+  console.log(wallets);
+
+  const currentWalletId = (wallet: string) => {
+    return wallets.find((item) => wallet === item.walletName);
+  };
+
+  console.log(currentWalletId("Картка")?.id);
+
+  const onSubmit: SubmitHandler<ITransactions> = (data) => {
+    console.log({
+      ...data,
+      id: nanoid(),
+      walletId: currentWalletId(data.walletId)?.id,
+      type: isSpend ? "витрати" : "прибуток",
+    });
+    // dispatch(
+    //   userActions.addTransaction({
+    //     ...data,
+    //     id: nanoid(),
+    //     type: isSpend ? "витрати" : "прибуток",
+    //   })
+    // );
+  };
 
   let i = 0;
 
   const SpendingFormBody = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Label>Дата</Label>
-      <Input {...register("date")} defaultValue={localDate} />
+      <Input {...register("createdAt")} defaultValue={localDate} />
 
       <Label>Рахунок</Label>
-      <Select {...register("account")}>
+      <Select {...register("walletId")}>
         {wallets.map((wallet: any) => {
           return <option key={wallet.id}>{wallet.walletName}</option>;
         })}

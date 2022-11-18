@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { User, LE } from "../../types";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User, LE, ITransactions } from "../../types";
 import axios from "axios";
 
 const initialState: LE<User> = {
@@ -43,21 +43,17 @@ const getUser = createAsyncThunk("home/getUser", async () => {
   return response.data;
 });
 
-// const editUsername = createAsyncThunk<any, string>(
-//   "home/editUsername",
-//   async (newUsername) => {
-//     const response = await axios.put("/mock/user.json", {
-//       username: newUsername,
-//     });
-//     // console.log(response.data[0]);
-//     return response.data[0];
-//   }
-// );
-
 const userSlice = createSlice({
   name: "user",
   initialState: userInitialState,
-  reducers: {},
+  reducers: {
+    addTransaction: (state, action: PayloadAction<ITransactions>) => {
+      console.log("addTransaction:");
+      console.log(state);
+      return state;
+    },
+  },
+
   extraReducers: (builder) => {
     builder.addCase(getUser.pending, (store) => {
       store.userData.isLoading = true;
@@ -70,24 +66,13 @@ const userSlice = createSlice({
       store.userData.isLoading = false;
       store.userData.error = "Помилка завантаження данних користувача";
     });
-
-    // builder.addCase(editUsername.pending, (store) => {
-    //   store.userData.isLoading = true;
-    // });
-    // builder.addCase(editUsername.fulfilled, (store, { payload }) => {
-    //   store.userData.users[0].username = payload;
-    //   store.userData.isLoading = false;
-    // });
-    // builder.addCase(editUsername.rejected, (store) => {
-    //   store.userData.isLoading = false;
-    //   store.userData.error = "Помилка завантаження данних користувача";
-    // });
   },
 });
 
 export const userActions = {
   ...userSlice.actions,
   getUser,
+  // addTransaction,
   // editUsername,
 };
 

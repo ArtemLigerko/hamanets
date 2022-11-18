@@ -7,7 +7,7 @@ export interface User {
   id: string;
   capital: {
     wallets: Wallet[];
-    transactions: Transactions[];
+    transactions: ITransactions[];
     total: number;
   };
 }
@@ -18,7 +18,7 @@ interface Wallet {
   total: number;
 }
 
-export interface Transactions {
+export interface ITransactions {
   id: string;
   walletId: string;
   createdAt: string;

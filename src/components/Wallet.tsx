@@ -13,6 +13,18 @@ const Wallet: React.FC = () => {
     (store) => store.user.userData.capital.wallets
   );
 
+  // const transactions = useAppSelector(
+  //   (store) => store.user.userData.capital.transactions
+  // );
+
+  // console.log(transactions);
+
+  // let result = transactions.reduce((sum, el) => {
+  //   return sum + el.sum;
+  // }, 0);
+
+  // console.log(result);
+
   return (
     <>
       {wallets.length ? (

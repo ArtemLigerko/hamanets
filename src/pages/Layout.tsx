@@ -25,23 +25,23 @@ const Center = styled.div`
   /* height: calc(100vh - 40px - 40px - 40px); */
 `;
 
-const LeftMenu = styled.div`
-  background-color: #d8d8d8;
-  width: 300px;
-  height: 100%;
-`;
+// const LeftMenu = styled.div`
+//   background-color: #d8d8d8;
+//   width: 300px;
+//   height: 100%;
+// `;
 
-const Calendar = styled.header`
-  background-color: #da96c9;
-  width: 100%;
-  height: 300px;
-`;
+// const Calendar = styled.header`
+//   background-color: #da96c9;
+//   width: 100%;
+//   height: 300px;
+// `;
 
-const Filters = styled.header`
-  background-color: #b696da;
-  width: 100%;
-  height: calc(100vh - 40px - 40px - 300px - 40px);
-`;
+// const Filters = styled.header`
+//   background-color: #b696da;
+//   width: 100%;
+//   height: calc(100vh - 40px - 40px - 300px - 40px);
+// `;
 
 const Footer = styled.header`
   background-color: #e9bd98;
@@ -55,10 +55,10 @@ const Layout: React.FC<ChildrenProps> = () => {
       <Window>
         <NavBar />
         <Main>
-          <LeftMenu>
+          {/* <LeftMenu>
             <Calendar>Calendar</Calendar>
             <Filters>Filters</Filters>
-          </LeftMenu>
+          </LeftMenu> */}
           <Center>
             <main>
               <Outlet />
