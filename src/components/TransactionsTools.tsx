@@ -16,12 +16,16 @@ const TransactionsTools = () => {
     dispatch(userActions.getUser());
   };
 
+  const handleClearUserData = () => {
+    dispatch(userActions.clearUser());
+  };
+
   return (
     <>
       <StyledButton variant="contained" onClick={handleGetUserData}>
         Завантажити дані
       </StyledButton>
-      <StyledButton variant="contained" onClick={handleGetUserData}>
+      <StyledButton variant="contained" onClick={handleClearUserData}>
         Видалити дані
       </StyledButton>
       <TransactionForm

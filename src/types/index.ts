@@ -20,7 +20,7 @@ interface Wallet {
 
 export interface ITransactions {
   id: string;
-  walletId: string;
+  walletId: string | any;
   createdAt: string;
   type: string;
   category: string;

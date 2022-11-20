@@ -39,13 +39,13 @@ interface ISpendingForm {
 }
 
 // const schema = yup
-//   .object({
-//     date: yup
-//       .string()
-//       .required("Please, enter a valid date")
-//     sum: yup.number().required("Enter sum"),
-//   })
-//   .required();
+// .object({
+//   date: yup
+//     .string()
+//     .required("Please, enter a valid date")
+//   sum: yup.number().required("Enter sum"),
+// })
+// .required();
 
 const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   const { register, handleSubmit, reset } = useForm<ITransactions>({
@@ -58,28 +58,25 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
     (store) => store.user.userData.capital.wallets
   );
 
-  console.log(wallets);
-
   const currentWalletId = (wallet: string) => {
     return wallets.find((item) => wallet === item.walletName);
   };
 
-  console.log(currentWalletId("Картка")?.id);
-
   const onSubmit: SubmitHandler<ITransactions> = (data) => {
-    console.log({
-      ...data,
-      id: nanoid(),
-      walletId: currentWalletId(data.walletId)?.id,
-      type: isSpend ? "витрати" : "прибуток",
-    });
-    // dispatch(
-    //   userActions.addTransaction({
-    //     ...data,
-    //     id: nanoid(),
-    //     type: isSpend ? "витрати" : "прибуток",
-    //   })
-    // );
+    // console.log({
+    //   ...data,
+    //   id: nanoid(),
+    //   walletId: currentWalletId(data.walletId)?.id,
+    //   type: isSpend ? "витрати" : "прибуток",
+    // });
+    dispatch(
+      userActions.addTransaction({
+        ...data,
+        id: nanoid(),
+        walletId: currentWalletId(data.walletId)?.id,
+        type: isSpend ? "витрати" : "прибуток",
+      })
+    );
   };
 
   let i = 0;

@@ -47,10 +47,12 @@ const userSlice = createSlice({
   name: "user",
   initialState: userInitialState,
   reducers: {
-    addTransaction: (state, action: PayloadAction<ITransactions>) => {
-      console.log("addTransaction:");
-      console.log(state);
-      return state;
+    addTransaction: (store, action: PayloadAction<ITransactions>) => {
+      // console.log("addTransaction:");
+      store.userData.capital.transactions.push(action.payload);
+    },
+    clearUser: (store) => {
+      store.userData.capital.transactions = [];
     },
   },
 
@@ -72,8 +74,6 @@ const userSlice = createSlice({
 export const userActions = {
   ...userSlice.actions,
   getUser,
-  // addTransaction,
-  // editUsername,
 };
 
 export default userSlice.reducer;
