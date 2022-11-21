@@ -10,7 +10,7 @@ import { userActions } from "../../redux/reducers/user";
 
 import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { localDate } from "../../services/localDateTime";
-import { ITransactions } from "../../types";
+import { ITransactions, IWallet } from "../../types";
 
 const StyledForm = styled.form`
   display: flex;
@@ -44,8 +44,8 @@ interface ISpendingForm {
 // })
 // .required();
 
-const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
-  const { register, handleSubmit, reset } = useForm<ITransactions>({
+const WalletForm = ({ title, button, isSpend }: ISpendingForm) => {
+  const { register, handleSubmit, reset } = useForm<IWallet>({
     // resolver: yupResolver(schema),
   });
 
@@ -59,45 +59,33 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
     return wallets.find((item) => wallet === item.walletName);
   };
 
-  const onSubmit: SubmitHandler<ITransactions> = (data) => {
+  const onSubmit: SubmitHandler<IWallet> = (data) => {
     dispatch(
-      userActions.addTransaction({
+      userActions.addWallet({
         ...data,
         id: nanoid(),
-        walletId: currentWalletId(data.walletId)?.id,
-        type: isSpend ? "витрати" : "прибуток",
-        sum: isSpend ? -data.sum : +data.sum,
+        total: 0,
       })
     );
+    // console.log({
+    //   ...data,
+    //   id: nanoid(),
+    //   sum: 0,
+    // });
   };
 
   let i = 0;
 
-  const SpendingFormBody = (
+  const AddWalletBody = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Label>Дата</Label>
+      <Label>Дата створення</Label>
       <Input {...register("createdAt")} defaultValue={localDate} />
 
-      <Label>Рахунок</Label>
-      <Select {...register("walletId")}>
-        {wallets.map((wallet: any) => {
-          return <option key={wallet.id}>{wallet.walletName}</option>;
-        })}
-      </Select>
+      <Label>Назва рахунку</Label>
+      <Input {...register("walletName")} />
 
-      <Label>Стаття</Label>
-      <Select {...register("category")}>
-        {isSpend
-          ? spendCategoryList.map((category) => {
-              return <option key={i++}>{category}</option>;
-            })
-          : revenueCategoryList.map((category) => {
-              return <option key={i++}>{category}</option>;
-            })}
-      </Select>
-
-      <Label>Сума</Label>
-      <Input {...register("sum")} />
+      {/* <Label>Сума на рахунку</Label>
+      <Input {...register("sum")} /> */}
 
       <Input type="submit" value="Зберегти" />
     </StyledForm>
@@ -105,13 +93,9 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
 
   return (
     <>
-      <ModalUniversal
-        title={title}
-        button={button}
-        content={SpendingFormBody}
-      />
+      <ModalUniversal title={title} button={button} content={AddWalletBody} />
     </>
   );
 };
 
-export default TransactionForm;
+export default WalletForm;

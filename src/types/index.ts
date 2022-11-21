@@ -6,14 +6,15 @@ export interface User {
   username: string;
   id: string;
   capital: {
-    wallets: Wallet[];
+    wallets: IWallet[];
     transactions: ITransactions[];
     total: number;
   };
 }
 
-interface Wallet {
+export interface IWallet {
   id: string;
+  createdAt: string;
   walletName: string;
   total: number;
 }
