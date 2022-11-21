@@ -26,10 +26,10 @@ const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto" defaultActiveKey="/">
               <Nav.Link as={Link} to="/">
-                Транзакції
-              </Nav.Link>
-              <Nav.Link as={Link} to="/accounts">
                 Гаманці
+              </Nav.Link>
+              <Nav.Link as={Link} to="/transactions">
+                Транзакції
               </Nav.Link>
               <Nav.Link as={Link} to="/report">
                 Звіти

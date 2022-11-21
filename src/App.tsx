@@ -17,6 +17,20 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route
+              path="/"
+              element={
+                <>
+                  <ToolsContainer>
+                    <WalletTools />
+                  </ToolsContainer>
+                  <DataContainer>
+                    <Wallet />
+                  </DataContainer>
+                </>
+              }
+            />
+            <Route
+              path="/transactions"
               index
               element={
                 <>
@@ -24,20 +38,6 @@ const App: React.FC = () => {
                     <TransactionsTools />
                   </ToolsContainer>
                   <TransactionsTable />
-                </>
-              }
-            />
-            <Route
-              path="/accounts"
-              element={
-                <>
-                  <ToolsContainer>
-                    <WalletTools />
-                  </ToolsContainer>
-
-                  <DataContainer>
-                    <Wallet />
-                  </DataContainer>
                 </>
               }
             />

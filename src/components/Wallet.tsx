@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import styled from "styled-components";
+import { userActions } from "../redux/reducers/user";
 
 const StyledCard = styled(Card)`
   margin: 3px;
@@ -13,17 +14,11 @@ const Wallet: React.FC = () => {
     (store) => store.user.userData.capital.wallets
   );
 
-  // const transactions = useAppSelector(
-  //   (store) => store.user.userData.capital.transactions
-  // );
+  const dispatch = useAppDispatch();
 
-  // console.log(transactions);
-
-  // let result = transactions.reduce((sum, el) => {
-  //   return sum + el.sum;
-  // }, 0);
-
-  // console.log(result);
+  useEffect(() => {
+    dispatch(userActions.calcWalletTotal());
+  }, []);
 
   return (
     <>

@@ -54,6 +54,21 @@ const userSlice = createSlice({
     clearUser: (store) => {
       store.userData.capital.transactions = [];
     },
+    calcWalletTotal: (store) => {
+      let walletSum = 0;
+      for (let i = 0; i < store.userData.capital.wallets.length; i++) {
+        for (let j = 0; j < store.userData.capital.transactions.length; j++) {
+          if (
+            store.userData.capital.wallets[i].id ===
+            store.userData.capital.transactions[j].walletId
+          ) {
+            walletSum = walletSum + store.userData.capital.transactions[j].sum;
+          }
+        }
+        store.userData.capital.wallets[i].total = walletSum;
+        walletSum = 0;
+      }
+    },
   },
 
   extraReducers: (builder) => {

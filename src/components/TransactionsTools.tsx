@@ -29,14 +29,14 @@ const TransactionsTools = () => {
         Видалити дані
       </StyledButton>
       <TransactionForm
-        title="Введіть витрати"
-        button="Додати витрати"
-        isSpend={true}
-      />
-      <TransactionForm
         title="Введіть прибуток"
         button="Додати прибуток"
         isSpend={false}
+      />
+      <TransactionForm
+        title="Введіть витрати"
+        button="Додати витрати"
+        isSpend={true}
       />
     </>
   );

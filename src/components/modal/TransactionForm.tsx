@@ -63,18 +63,13 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   };
 
   const onSubmit: SubmitHandler<ITransactions> = (data) => {
-    // console.log({
-    //   ...data,
-    //   id: nanoid(),
-    //   walletId: currentWalletId(data.walletId)?.id,
-    //   type: isSpend ? "витрати" : "прибуток",
-    // });
     dispatch(
       userActions.addTransaction({
         ...data,
         id: nanoid(),
         walletId: currentWalletId(data.walletId)?.id,
         type: isSpend ? "витрати" : "прибуток",
+        sum: isSpend ? -data.sum : +data.sum,
       })
     );
   };
