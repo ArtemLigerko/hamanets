@@ -1,14 +1,13 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Layout from "./pages/Layout";
-import TransactionsTable from "./components/TransactionsTable";
+
 import NotFound404 from "./components/NotFound404";
-import Wallet from "./components/Wallet";
-import WalletTools from "./components/WalletTools";
+import TransactionsBar from "./components/TransactionsBar";
+import TransactionsTable from "./components/TransactionsTable";
+import Wallets from "./components/Wallets";
+import WalletBar from "./components/WalletsBar";
 import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
-import TransactionsTools from "./components/TransactionsTools";
-import SpendingInputForm from "./components/modal/TransactionForm";
-// import Home from "./pages/Home";
+import Layout from "./pages/Layout";
 
 const App: React.FC = () => {
   return (
@@ -21,10 +20,10 @@ const App: React.FC = () => {
               element={
                 <>
                   <ToolsContainer>
-                    <WalletTools />
+                    <WalletBar />
                   </ToolsContainer>
                   <DataContainer>
-                    <Wallet />
+                    <Wallets />
                   </DataContainer>
                 </>
               }
@@ -35,7 +34,7 @@ const App: React.FC = () => {
               element={
                 <>
                   <ToolsContainer>
-                    <TransactionsTools />
+                    <TransactionsBar />
                   </ToolsContainer>
                   <TransactionsTable />
                 </>

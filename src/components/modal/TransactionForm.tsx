@@ -59,6 +59,8 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
     return wallets.find((item) => wallet === item.walletName);
   };
 
+  // let toggleClose;
+  
   const onSubmit: SubmitHandler<ITransactions> = (data) => {
     dispatch(
       userActions.addTransaction({
@@ -69,6 +71,8 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
         sum: isSpend ? -data.sum : +data.sum,
       })
     );
+    reset();
+    // toggleClose = false;
   };
 
   let i = 0;
@@ -109,6 +113,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
         title={title}
         button={button}
         content={SpendingFormBody}
+        // toggleClose={toggleClose}
       />
     </>
   );

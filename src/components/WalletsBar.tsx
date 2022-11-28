@@ -7,7 +7,7 @@ const StyledButton = styled(Button)`
   margin: 0 5px !important;
 `;
 
-const TransactionsTools = () => {
+const WalletBar = () => {
   return (
     <>
       <WalletForm
@@ -15,11 +15,8 @@ const TransactionsTools = () => {
         button="Новий рахунок"
         isSpend={false}
       />
-      <StyledButton variant="contained">Add wallet</StyledButton>
-      <StyledButton variant="contained">Edit Wallet</StyledButton>
-      <StyledButton variant="contained">Delete Wallet</StyledButton>
     </>
   );
 };
 
-export default TransactionsTools;
+export default WalletBar;

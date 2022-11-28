@@ -1,15 +1,15 @@
-import React from "react";
+import Button from "@mui/material/Button";
 import styled from "styled-components";
+
 import { useAppDispatch } from "../redux/hooks";
 import { userActions } from "../redux/reducers/user";
-import Button from "@mui/material/Button";
 import TransactionForm from "./modal/TransactionForm";
 
 export const StyledButton = styled(Button)`
   margin: 0 5px !important;
 `;
 
-const TransactionsTools = () => {
+const TransactionsBar = () => {
   const dispatch = useAppDispatch();
 
   const handleGetUserData = () => {
@@ -36,10 +36,10 @@ const TransactionsTools = () => {
       <TransactionForm
         title="Введіть витрати"
         button="Додати витрати"
-        isSpend={true}
+        isSpend
       />
     </>
   );
 };
 
-export default TransactionsTools;
+export default TransactionsBar;

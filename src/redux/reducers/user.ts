@@ -11,6 +11,7 @@ const initialState: LE<User> = {
         id: "",
         createdAt: "",
         walletName: "",
+        initialSum: 0,
         total: 0,
       },
     ],
@@ -51,6 +52,9 @@ const userSlice = createSlice({
     addWallet: (store, action: PayloadAction<IWallet>) => {
       store.userData.capital.wallets.push(action.payload);
     },
+    delWallet: (store, action: PayloadAction<number>) => {
+      store.userData.capital.wallets.splice(action.payload, 1);
+    },
     addTransaction: (store, action: PayloadAction<ITransactions>) => {
       store.userData.capital.transactions.push(action.payload);
     },
@@ -59,6 +63,7 @@ const userSlice = createSlice({
     },
     calcWalletTotal: (store) => {
       let walletSum = 0;
+      
       for (let i = 0; i < store.userData.capital.wallets.length; i++) {
         for (let j = 0; j < store.userData.capital.transactions.length; j++) {
           if (
@@ -68,7 +73,8 @@ const userSlice = createSlice({
             walletSum = walletSum + store.userData.capital.transactions[j].sum;
           }
         }
-        store.userData.capital.wallets[i].total = walletSum;
+        store.userData.capital.wallets[i].total = walletSum + 
+        +store.userData.capital.wallets[i].initialSum;
         walletSum = 0;
       }
     },

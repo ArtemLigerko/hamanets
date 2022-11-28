@@ -1,16 +1,14 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
+
 // import { yupResolver } from "@hookform/resolvers/yup";
-
-import ModalUniversal from "./ModalUniversal";
-
+// import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { userActions } from "../../redux/reducers/user";
-
-import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { localDate } from "../../services/localDateTime";
-import { ITransactions, IWallet } from "../../types";
+import { IWallet } from "../../types";
+import ModalUniversal from "./ModalUniversal";
 
 const StyledForm = styled.form`
   display: flex;
@@ -25,9 +23,9 @@ const Input = styled.input`
   margin: 0 0 10px 0;
 `;
 
-const Select = styled.select`
-  margin: 0 0 10px 0;
-`;
+// const Select = styled.select`
+//   margin: 0 0 10px 0;
+// `;
 
 interface ISpendingForm {
   title: string;
@@ -64,17 +62,17 @@ const WalletForm = ({ title, button, isSpend }: ISpendingForm) => {
       userActions.addWallet({
         ...data,
         id: nanoid(),
-        total: 0,
+        total: data.initialSum,
       })
     );
     // console.log({
     //   ...data,
     //   id: nanoid(),
-    //   sum: 0,
+    //   total: data.initialSum,
     // });
   };
 
-  let i = 0;
+  // let i = 0;
 
   const AddWalletBody = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -84,8 +82,8 @@ const WalletForm = ({ title, button, isSpend }: ISpendingForm) => {
       <Label>Назва рахунку</Label>
       <Input {...register("walletName")} />
 
-      {/* <Label>Сума на рахунку</Label>
-      <Input {...register("sum")} /> */}
+      <Label>Сума на рахунку</Label>
+      <Input {...register("initialSum")} />
 
       <Input type="submit" value="Зберегти" />
     </StyledForm>

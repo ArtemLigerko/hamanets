@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { StyledButton } from "../TransactionsTools";
+import { StyledButton } from "../TransactionsBar";
 
 interface ModalProps {
   button?: string | JSX.Element;
   title?: string;
   content?: JSX.Element | null;
   footer?: JSX.Element | null;
-  // toggleClose?: () => void;
+  // toggleClose?: boolean;
 }
 
 const ModalUniversal = ({
   button,
   title,
   content,
+  // toggleClose,
 }: // footer,
 // showState
 ModalProps) => {
@@ -32,7 +33,7 @@ ModalProps) => {
 
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+<Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{content}</Modal.Body>
       </Modal>

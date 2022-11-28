@@ -16,6 +16,7 @@ export interface IWallet {
   id: string;
   createdAt: string;
   walletName: string;
+  initialSum: number;
   total: number;
 }
 
