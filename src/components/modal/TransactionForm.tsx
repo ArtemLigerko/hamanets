@@ -1,16 +1,15 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { nanoid } from "@reduxjs/toolkit";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
-// import { yupResolver } from "@hookform/resolvers/yup";
-
-import ModalUniversal from "./ModalUniversal";
-
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { userActions } from "../../redux/reducers/user";
+import * as yup from "yup";
 
 import { revenueCategoryList, spendCategoryList } from "../../lists";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { userActions } from "../../redux/reducers/user";
 import { localDate } from "../../services/localDateTime";
 import { ITransactions } from "../../types";
+import ModalUniversal from "./ModalUniversal";
 
 const StyledForm = styled.form`
   display: flex;
@@ -35,18 +34,17 @@ interface ISpendingForm {
   isSpend: boolean;
 }
 
-// const schema = yup
-// .object({
-//   createdAt: yup
-//     .string()
-//     .required("Please, enter a valid date")
-//   sum: yup.number().required("Enter number"),
-// })
-// .required();
+const schema = yup
+  .object()
+  .shape({
+    createdAt: yup.string().required("Please, enter a valid date"),
+    sum: yup.number().required("Enter number"),
+  })
+  .required();
 
 const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   const { register, handleSubmit, reset } = useForm<ITransactions>({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
   });
 
   const dispatch = useAppDispatch();
@@ -60,7 +58,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   };
 
   // let toggleClose;
-  
+
   const onSubmit: SubmitHandler<ITransactions> = (data) => {
     dispatch(
       userActions.addTransaction({

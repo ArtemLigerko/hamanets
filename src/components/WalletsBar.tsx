@@ -1,6 +1,7 @@
+import Button from "@mui/material/Button";
 import React from "react";
 import styled from "styled-components";
-import Button from "@mui/material/Button";
+
 import WalletForm from "./modal/WalletForm";
 
 const StyledButton = styled(Button)`

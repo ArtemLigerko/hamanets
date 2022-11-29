@@ -1,14 +1,32 @@
 import React, { useEffect } from "react";
-import { Button, Card, Container } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Button, Card, Container, Row } from "react-bootstrap";
+import { PencilSquare, XSquare } from "react-bootstrap-icons";
 import styled from "styled-components";
+
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { userActions } from "../redux/reducers/user";
+import { currencyFormat } from "../services/currencyFormat";
 import ConfirmUniversal from "./modal/ConfirmUniversal";
 
 const StyledCard = styled(Card)`
   margin: 3px;
-  width: 16rem;
+  width: 85.6mm;
+  height: 53.98mm;
 `;
+
+const StyledButton = styled(Button)`
+  height: 30px;
+  width: 30px;
+`;
+
+const actionButton = (
+  <StyledButton
+    variant="primary"
+    className="p-0 mx-0 d-flex justify-content-center align-items-center"
+  >
+    <XSquare />
+  </StyledButton>
+);
 
 const Wallet: React.FC = () => {
   const wallets = useAppSelector(
@@ -28,42 +46,49 @@ const Wallet: React.FC = () => {
 
   const handleEditWallet = (id: string): void => {
     const walletIndex = wallets.findIndex((wallet) => wallet.id === id);
-
     // dispatch(userActions.delWallet(walletIndex));
   };
 
   return (
     <>
-      <Container fluid className="fluid ms">
-        {wallets.length ? (
-          wallets.map((wallet) => (
-            <StyledCard className="card" key={wallet.id} border="dark">
-              <Card.Header className="d-flex justify-content-between">
-                <span>{wallet.walletName}</span>
-                <div>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleEditWallet(wallet.id)}
-                  >
-                    edit
-                  </Button>
-                  <ConfirmUniversal
-                    buttonName="del"
-                    title="Видалення рахунку"
-                    body="Ви впевнені у видаленні рахунку?"
-                    handleOk={() => handleDelWallet(wallet.id)}
-                  />
-                </div>
-              </Card.Header>
-              <Card.Body>
-                <Card.Title>{wallet.total}</Card.Title>
-                <Card.Text>Якась інфа </Card.Text>
-              </Card.Body>
-            </StyledCard>
-          ))
-        ) : (
-          <div>No wallets</div>
-        )}
+      <Container fluid="xs">
+        <Row className="d-xl-flex justify-content-center">
+          {wallets.length ? (
+            wallets.map((wallet) => (
+              <StyledCard className="card" key={wallet.id} border="dark">
+                <Card.Header className="d-flex justify-content-between">
+                  <div className="fs-5 fw-normal d-flex justify-content-center align-items-center">
+                    {wallet.walletName}
+                  </div>
+
+                  <div className="d-flex justify-content-center align-items-center">
+                    <StyledButton
+                      className="p-0 mx-1 d-flex justify-content-center align-items-center"
+                      variant="primary"
+                      onClick={() => handleEditWallet(wallet.id)}
+                    >
+                      <PencilSquare />
+                    </StyledButton>
+                    <ConfirmUniversal
+                      actionButton={actionButton}
+                      title="Видалення рахунку!"
+                      body="Ви впевнені у видаленні рахунку?"
+                      handleOk={() => handleDelWallet(wallet.id)}
+                    />
+                  </div>
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title className="fs-2">
+                    {currencyFormat(wallet.total)}
+                  </Card.Title>
+                  <Card.Text>{wallet.createdAt}</Card.Text>
+                </Card.Body>
+              </StyledCard>
+            ))
+          ) : (
+            <div>No wallets</div>
+          )}
+        </Row>
       </Container>
     </>
   );

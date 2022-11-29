@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function ConfirmUniversal({ buttonName, title, body, handleOk }: any) {
+const ConfirmUniversal = ({ actionButton, title, body, handleOk }: any) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -10,9 +10,7 @@ function ConfirmUniversal({ buttonName, title, body, handleOk }: any) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        {buttonName}
-      </Button>
+      <div onClick={handleShow}>{actionButton}</div>
 
       <Modal
         show={show}
@@ -35,6 +33,6 @@ function ConfirmUniversal({ buttonName, title, body, handleOk }: any) {
       </Modal>
     </>
   );
-}
+};
 
 export default ConfirmUniversal;

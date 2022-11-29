@@ -1,16 +1,14 @@
+import $ from "jquery";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 import App from "./App";
-
+import { store, persistor } from "./redux/store";
 import "./styles/reset.css";
 import "./styles/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import $ from "jquery";
 import "datatables.net";
 import "datatables.net-bs5";
 

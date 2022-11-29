@@ -1,5 +1,6 @@
 import { Navbar } from "react-bootstrap";
 import styled from "styled-components";
+
 import { ChildrenProps } from "../types";
 
 const StyledToolsPanel = styled.header`

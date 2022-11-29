@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { ChildrenProps } from "../types";
 import styled from "styled-components";
+
+import { ChildrenProps } from "../types";
 
 const StyledContainer = styled(Container)`
   display: flex;

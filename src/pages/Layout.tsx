@@ -1,8 +1,9 @@
 import React from "react";
-import { ChildrenProps } from "../types";
-import styled from "styled-components";
-import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+
+import NavBar from "../components/NavBar";
+import { ChildrenProps } from "../types";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
