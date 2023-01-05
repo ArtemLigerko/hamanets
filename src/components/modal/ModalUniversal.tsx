@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 
 import { StyledButton } from "../TransactionsBar";
@@ -9,22 +8,19 @@ interface ModalProps {
   title?: string;
   content?: JSX.Element | null;
   footer?: JSX.Element | null;
-  // toggleClose?: boolean;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalUniversal = ({
   button,
   title,
   content,
-}: // toggleClose,
-// footer,
-// showState
-ModalProps) => {
-  const [show, setShow] = useState(false);
-
+  show,
+  setShow,
+}: ModalProps) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // const toggleShowState = () => setShow(!show);
 
   return (
     <>

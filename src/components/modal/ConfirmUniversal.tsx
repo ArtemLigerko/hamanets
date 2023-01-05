@@ -2,7 +2,19 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const ConfirmUniversal = ({ actionButton, title, body, handleOk }: any) => {
+interface ConfirmProps {
+  actionButton?: string | JSX.Element;
+  title?: string;
+  content?: string;
+  handleOk: any;
+}
+
+const ConfirmUniversal = ({
+  actionButton,
+  title,
+  content,
+  handleOk,
+}: ConfirmProps) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -21,7 +33,7 @@ const ConfirmUniversal = ({ actionButton, title, body, handleOk }: any) => {
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{body}</Modal.Body>
+        <Modal.Body>{content}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel

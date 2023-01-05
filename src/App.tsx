@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import styled from "styled-components";
 
 import NotFound404 from "./components/NotFound404";
 import TransactionsBar from "./components/TransactionsBar";
@@ -9,9 +11,13 @@ import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import Layout from "./pages/Layout";
 
+const Main = styled.main`
+  width: 100%;
+`;
+
 const App: React.FC = () => {
   return (
-    <>
+    <Main>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -51,7 +57,7 @@ const App: React.FC = () => {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </Main>
   );
 };
 

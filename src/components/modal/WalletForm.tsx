@@ -1,12 +1,15 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ErrorRounded } from "@mui/icons-material";
 import { nanoid } from "@reduxjs/toolkit";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
+import * as yup from "yup";
 
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { userActions } from "../../redux/reducers/user";
-import { localDate } from "../../services/localDateTime";
 import { IWallet } from "../../types";
 import ModalUniversal from "./ModalUniversal";
 
@@ -27,35 +30,47 @@ const Input = styled.input`
 //   margin: 0 0 10px 0;
 // `;
 
-interface ISpendingForm {
+interface IWalletForm {
   title: string;
   button: string;
-  isSpend: boolean;
 }
 
-// const schema = yup
-// .object({
-//   createdAt: yup
-//     .string()
-//     .required("Please, enter a valid date")
-//   sum: yup.number().required("Enter number"),
-// })
-// .required();
+const schema = yup
+  .object()
+  .shape({
+    // createdAt: yup.date().required(),
+    walletName: yup.string().required("Введіть назву рахунку"),
+    initialSum: yup
+      .number()
+      .typeError("Повинно бути число")
+      .nullable()
+      .min(0, "Сумма повинна бути позитивна чи 0")
+      // .round("round")
+      .required("Введіть число"),
+  })
+  .required("hh");
 
-const WalletForm = ({ title, button, isSpend }: ISpendingForm) => {
-  const { register, handleSubmit, reset } = useForm<IWallet>({
-    // resolver: yupResolver(schema),
+const WalletForm = ({ title, button }: IWalletForm) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IWallet>({
+    resolver: yupResolver(schema),
   });
+
+  const [show, setShow] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
-  const wallets = useAppSelector(
-    (store) => store.user.userData.capital.wallets
-  );
+  // const wallets = useAppSelector(
+  //   (store) => store.user.userData.capital.wallets
+  // );
 
-  const currentWalletId = (wallet: string) => {
-    return wallets.find((item) => wallet === item.walletName);
-  };
+  // const currentWalletId = (wallet: string) => {
+  //   return wallets.find((item) => wallet === item.walletName);
+  // };
 
   const onSubmit: SubmitHandler<IWallet> = (data) => {
     dispatch(
@@ -63,27 +78,28 @@ const WalletForm = ({ title, button, isSpend }: ISpendingForm) => {
         ...data,
         id: nanoid(),
         total: data.initialSum,
+        createdAt: new Date().toLocaleString(),
       })
     );
-    // console.log({
-    //   ...data,
-    //   id: nanoid(),
-    //   total: data.initialSum,
-    // });
+    setShow(false);
   };
 
   // let i = 0;
 
-  const AddWalletBody = (
+  const AddWallet = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Label>Дата створення</Label>
-      <Input {...register("createdAt")} defaultValue={localDate} />
+      {/* <Label>Дата створення</Label>
+      <Input {...register("createdAt")} defaultValue={localDate} type="date" />
+    {errors.createdAt && <p>{errors?.createdAt.message}</p>} */}
+      <Label>Дата створення: {new Date().toLocaleString()}</Label>
 
       <Label>Назва рахунку</Label>
-      <Input {...register("walletName")} />
+      <Input {...register("walletName")} type="text" />
+      {errors.walletName && <p>{errors?.walletName.message}</p>}
 
       <Label>Сума на рахунку</Label>
-      <Input {...register("initialSum")} />
+      <Input {...register("initialSum")} defaultValue={0} />
+      {errors.initialSum && <p>{errors?.initialSum.message}</p>}
 
       <Input type="submit" value="Зберегти" />
     </StyledForm>
@@ -91,7 +107,13 @@ const WalletForm = ({ title, button, isSpend }: ISpendingForm) => {
 
   return (
     <>
-      <ModalUniversal title={title} button={button} content={AddWalletBody} />
+      <ModalUniversal
+        title={title}
+        button={button}
+        content={AddWallet}
+        show={show}
+        setShow={setShow}
+      />
     </>
   );
 };

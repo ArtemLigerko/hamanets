@@ -19,15 +19,6 @@ const StyledButton = styled(Button)`
   width: 30px;
 `;
 
-const actionButton = (
-  <StyledButton
-    variant="primary"
-    className="p-0 mx-0 d-flex justify-content-center align-items-center"
-  >
-    <XSquare />
-  </StyledButton>
-);
-
 const Wallet: React.FC = () => {
   const wallets = useAppSelector(
     (store) => store.user.userData.capital.wallets
@@ -48,6 +39,15 @@ const Wallet: React.FC = () => {
     const walletIndex = wallets.findIndex((wallet) => wallet.id === id);
     // dispatch(userActions.delWallet(walletIndex));
   };
+
+  const actionButton = (
+    <StyledButton
+      variant="primary"
+      className="p-0 mx-0 d-flex justify-content-center align-items-center"
+    >
+      <XSquare />
+    </StyledButton>
+  );
 
   return (
     <>
@@ -72,7 +72,7 @@ const Wallet: React.FC = () => {
                     <ConfirmUniversal
                       actionButton={actionButton}
                       title="Видалення рахунку!"
-                      body="Ви впевнені у видаленні рахунку?"
+                      content="Ви впевнені у видаленні рахунку?"
                       handleOk={() => handleDelWallet(wallet.id)}
                     />
                   </div>
@@ -81,7 +81,9 @@ const Wallet: React.FC = () => {
                   <Card.Title className="fs-2">
                     {currencyFormat(wallet.total)}
                   </Card.Title>
-                  <Card.Text>{wallet.createdAt}</Card.Text>
+                  <Card.Text>
+                    {new Date(wallet.createdAt).toLocaleDateString()}
+                  </Card.Text>
                 </Card.Body>
               </StyledCard>
             ))

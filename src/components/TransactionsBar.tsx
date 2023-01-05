@@ -10,24 +10,24 @@ export const StyledButton = styled(Button)`
 `;
 
 const TransactionsBar = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const handleGetUserData = () => {
-    dispatch(userActions.getUser());
-  };
+  // const handleGetUserData = () => {
+  //   dispatch(userActions.getUser());
+  // };
 
-  const handleClearUserData = () => {
-    dispatch(userActions.clearUser());
-  };
+  // const handleClearUserData = () => {
+  //   dispatch(userActions.clearUser());
+  // };
 
   return (
     <>
-      <StyledButton variant="contained" onClick={handleGetUserData}>
+      {/* <StyledButton variant="contained" onClick={handleGetUserData}>
         Завантажити дані
       </StyledButton>
       <StyledButton variant="contained" onClick={handleClearUserData}>
         Видалити дані
-      </StyledButton>
+      </StyledButton> */}
       <TransactionForm
         title="Введіть прибуток"
         button="Додати прибуток"

@@ -8,23 +8,23 @@ const initialState: LE<User> = {
   id: "",
   capital: {
     wallets: [
-      {
-        id: "",
-        createdAt: "",
-        walletName: "",
-        initialSum: 0,
-        total: 0,
-      },
+      // {
+      //   id: "",
+      //   createdAt: "",
+      //   walletName: "",
+      //   initialSum: 0,
+      //   total: 0,
+      // },
     ],
     transactions: [
-      {
-        id: "",
-        walletId: "",
-        createdAt: "",
-        type: "",
-        category: "",
-        sum: 0,
-      },
+      // {
+      //   id: "",
+      //   walletId: "",
+      //   createdAt: "",
+      //   type: "",
+      //   category: "",
+      //   sum: 0,
+      // },
     ],
     total: 0,
   },

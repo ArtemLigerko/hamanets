@@ -19,7 +19,7 @@ const ToolsContainer = ({ children }: ChildrenProps) => {
   return (
     <Navbar sticky="top">
       <StyledToolsPanel>
-        <Span>Tools Panel</Span>
+        <Span>Tools Bar</Span>
         <Span>{children}</Span>
       </StyledToolsPanel>
     </Navbar>

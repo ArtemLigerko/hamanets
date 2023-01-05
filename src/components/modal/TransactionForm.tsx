@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { nanoid } from "@reduxjs/toolkit";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
@@ -47,6 +48,8 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
     resolver: yupResolver(schema),
   });
 
+  const [show, setShow] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
 
   const wallets = useAppSelector(
@@ -70,12 +73,12 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
       })
     );
     reset();
-    // toggleClose = false;
+    setShow(false);
   };
 
   let i = 0;
 
-  const SpendingFormBody = (
+  const SpendingForm = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Label>Дата</Label>
       <Input {...register("createdAt")} defaultValue={localDate} />
@@ -110,8 +113,9 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
       <ModalUniversal
         title={title}
         button={button}
-        content={SpendingFormBody}
-        // toggleClose={toggleClose}
+        content={SpendingForm}
+        show={show}
+        setShow={setShow}
       />
     </>
   );
