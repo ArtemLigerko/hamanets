@@ -10,12 +10,19 @@ import WalletBar from "./components/WalletsBar";
 import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import Layout from "./pages/Layout";
+import { instanceTest } from "./services/api";
 
 const Main = styled.main`
   width: 100%;
 `;
 
 const App: React.FC = () => {
+  useEffect((): void => {
+    console.log("testing...");
+    console.log(process.env.REACT_APP_SERVER_URL);
+    instanceTest();
+  }, []);
+
   return (
     <Main>
       <BrowserRouter>
