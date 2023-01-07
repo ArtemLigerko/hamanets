@@ -23,6 +23,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+// For transactions table
 $(document).ready(() => {
   $("#transactions").DataTable({
     paging: true,
@@ -31,12 +32,12 @@ $(document).ready(() => {
 });
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <GlobalStyles />
-        <App />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <GlobalStyles />
+      <App />
+    </PersistGate>
+  </Provider>
+  // </React.StrictMode>
 );

@@ -7,9 +7,10 @@ import * as yup from "yup";
 
 import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { transactionsActions } from "../../redux/reducers/transactions";
 import { userActions } from "../../redux/reducers/user";
 import { localDate } from "../../services/localDateTime";
-import { ITransactions } from "../../types";
+import { ITransaction } from "../../types";
 import ModalUniversal from "./ModalUniversal";
 
 const StyledForm = styled.form`
@@ -44,7 +45,7 @@ const schema = yup
   .required();
 
 const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
-  const { register, handleSubmit, reset } = useForm<ITransactions>({
+  const { register, handleSubmit, reset } = useForm<ITransaction>({
     resolver: yupResolver(schema),
   });
 
@@ -62,7 +63,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
 
   // let toggleClose;
 
-  const onSubmit: SubmitHandler<ITransactions> = (data) => {
+  const onSubmit: SubmitHandler<ITransaction> = (data) => {
     dispatch(
       userActions.addTransaction({
         ...data,
@@ -72,6 +73,17 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
         sum: isSpend ? -data.sum : +data.sum,
       })
     );
+
+    dispatch(
+      transactionsActions.createTransaction({
+        ...data,
+        id: nanoid(),
+        walletId: currentWalletId(data.walletId)?.id,
+        type: isSpend ? "витрати" : "прибуток",
+        sum: isSpend ? -data.sum : +data.sum,
+      })
+    );
+
     reset();
     setShow(false);
   };

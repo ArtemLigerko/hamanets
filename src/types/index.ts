@@ -7,7 +7,7 @@ export interface User {
   id: string;
   capital: {
     wallets: IWallet[];
-    transactions: ITransactions[];
+    transactions: ITransaction[];
     total: number;
   };
 }
@@ -20,7 +20,7 @@ export interface IWallet {
   total: number;
 }
 
-export interface ITransactions {
+export interface ITransaction {
   id: string;
   walletId: string | any;
   createdAt: string;
@@ -33,3 +33,12 @@ export type LE<T> = T & {
   isLoading?: boolean;
   error?: string | Error;
 };
+
+export interface Pagination<T = object> {
+  docs: Array<T>;
+  limit: number;
+  hasNextPage?: boolean;
+  page: number;
+  nextPage?: number;
+  init?: boolean;
+}

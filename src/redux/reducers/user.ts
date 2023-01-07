@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { User, LE, ITransactions, IWallet } from "../../types";
+import { User, LE, ITransaction, IWallet } from "../../types";
 
 const initialState: LE<User> = {
   username: "",
@@ -56,7 +56,7 @@ const userSlice = createSlice({
     delWallet: (store, action: PayloadAction<number>) => {
       store.userData.capital.wallets.splice(action.payload, 1);
     },
-    addTransaction: (store, action: PayloadAction<ITransactions>) => {
+    addTransaction: (store, action: PayloadAction<ITransaction>) => {
       store.userData.capital.transactions.push(action.payload);
     },
     clearUser: (store) => {
