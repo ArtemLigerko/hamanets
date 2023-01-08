@@ -25,8 +25,8 @@ const App: React.FC = () => {
 
   useEffect((): void => {
     // instanceTest();
-    console.log("testing...");
     console.log(`Server: ${process.env.REACT_APP_SERVER_URL}`);
+    console.log("dispatching transactionsActions.getTransactions...");
     dispatch(transactionsActions.getTransactions());
     console.log(transactions);
   }, []);

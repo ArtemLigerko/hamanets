@@ -1,29 +1,21 @@
 import {
   createAsyncThunk,
   createSlice,
-  CreateSliceOptions,
-  PayloadAction,
+  current,
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 
 import instance from "../../services/api";
-import { LE, ITransaction } from "../../types";
+import { LE, ITransaction, Pagination } from "../../types";
 
-const initialState: ITransaction =
-  // [
-  {
-    id: "",
-    walletId: "",
-    createdAt: "",
-    type: "",
-    category: "",
-    sum: 0,
-  };
-// ];
+const initialState: LE<Pagination<ITransaction>> = {
+  docs: [],
+  isLoading: false,
+  error: undefined,
+};
 
 interface TransactionsStore {
-  // transactions: LE<ITransaction[]>;
-  transactions: ITransaction;
+  transactions: LE<Pagination<ITransaction>>;
 }
 
 const transactionsInitialState: TransactionsStore = {
@@ -38,12 +30,11 @@ const createTransaction = createAsyncThunk<ITransaction, ITransaction>(
   }
 );
 
-const getTransactions = createAsyncThunk<ITransaction>(
+const getTransactions = createAsyncThunk<ITransaction[]>(
   "transactions/get",
   async () => {
     try {
       const response = await instance.get("api/transactions");
-      console.log(response.data);
       return response.data;
     } catch (e) {
       console.log(e);
@@ -59,31 +50,40 @@ const transactionsSlice = createSlice<
   initialState: transactionsInitialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(createTransaction.pending, (store) => {
-      //   store.transactions.isLoading = true;
+    builder.addCase(createTransaction.pending, (state) => {
+      state.transactions.isLoading = true;
     });
-    builder.addCase(createTransaction.fulfilled, (store, { payload }) => {
-      //   store.transactions.isLoading = false;
-      //   store.transactions = [payload];
-      //   store.transactions.push(action.payload);
+    builder.addCase(createTransaction.fulfilled, (state, { payload }) => {
+      state.transactions.isLoading = false;
+
+      console.log("creating transactions...");
+      console.log(payload);
+
+      console.log("adding created transactions to state...");
+      state.transactions.docs.push(payload);
+      console.log(current(state));
     });
-    builder.addCase(createTransaction.rejected, (store) => {
-      //   store.transactions.isLoading = false;
-      //   store.transactions.error = "Failed to post transaction";
+    builder.addCase(createTransaction.rejected, (state) => {
+      state.transactions.isLoading = false;
       console.warn("Failed to post transaction");
     });
 
-    builder.addCase(getTransactions.pending, () => {
-      //   store.transactions.isLoading = true;
+    builder.addCase(getTransactions.pending, (state) => {
+      state.transactions.isLoading = true;
     });
-    builder.addCase(getTransactions.fulfilled, (store, { payload }) => {
-      //   store.transactions.isLoading = false;
-      store.transactions = payload;
+    builder.addCase(getTransactions.fulfilled, (state, { payload }) => {
+      state.transactions.isLoading = false;
+      console.log("getting transactions from server...");
+      console.log(payload);
+
+      console.log("writing transactions to state...");
+      state.transactions.docs = payload;
+      console.log(current(state));
     });
-    builder.addCase(getTransactions.rejected, (store) => {
-      //   store.transactions.isLoading = false;
-      //   store.transactions.error = "Failed to post transaction";
-      console.warn("Failed to post transaction");
+    builder.addCase(getTransactions.rejected, (state) => {
+      state.transactions.isLoading = false;
+      state.transactions.error = "Failed to post transaction";
+      console.log("Failed to post transaction");
     });
   },
 });

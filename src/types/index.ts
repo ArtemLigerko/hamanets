@@ -2,6 +2,10 @@ export interface ChildrenProps {
   children?: JSX.Element | JSX.Element[] | string | string[];
 }
 
+export interface MongoArtifacts {
+  _id: string;
+}
+
 export interface User {
   username: string;
   id: string;
@@ -20,7 +24,7 @@ export interface IWallet {
   total: number;
 }
 
-export interface ITransaction {
+export interface ITransaction extends MongoArtifacts {
   id: string;
   walletId: string | any;
   createdAt: string;
@@ -36,9 +40,9 @@ export type LE<T> = T & {
 
 export interface Pagination<T = object> {
   docs: Array<T>;
-  limit: number;
-  hasNextPage?: boolean;
-  page: number;
-  nextPage?: number;
-  init?: boolean;
+  // limit: number;
+  // hasNextPage?: boolean;
+  // page: number;
+  // nextPage?: number;
+  // init?: boolean;
 }
