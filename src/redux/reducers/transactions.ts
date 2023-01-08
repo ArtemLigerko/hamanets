@@ -5,24 +5,25 @@ import {
   PayloadAction,
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
-import axios from "axios";
 
 import instance from "../../services/api";
 import { LE, ITransaction } from "../../types";
 
-const initialState: ITransaction[] = [];
-// {
-//   id: "",
-//   walletId: "",
-//   createdAt: "",
-//   type: "",
-//   category: "",
-//   sum: 0,
-// };
+const initialState: ITransaction =
+  // [
+  {
+    id: "",
+    walletId: "",
+    createdAt: "",
+    type: "",
+    category: "",
+    sum: 0,
+  };
+// ];
 
 interface TransactionsStore {
   // transactions: LE<ITransaction[]>;
-  transactions: ITransaction[];
+  transactions: ITransaction;
 }
 
 const transactionsInitialState: TransactionsStore = {
@@ -37,11 +38,16 @@ const createTransaction = createAsyncThunk<ITransaction, ITransaction>(
   }
 );
 
-const getTransactions = createAsyncThunk<ITransaction, ITransaction>(
+const getTransactions = createAsyncThunk<ITransaction>(
   "transactions/get",
   async () => {
-    const response = await instance.get("api/transactions");
-    return response.data;
+    try {
+      const response = await instance.get("api/transactions");
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      console.log(e);
+    }
   }
 );
 
@@ -58,7 +64,7 @@ const transactionsSlice = createSlice<
     });
     builder.addCase(createTransaction.fulfilled, (store, { payload }) => {
       //   store.transactions.isLoading = false;
-      store.transactions = [payload];
+      //   store.transactions = [payload];
       //   store.transactions.push(action.payload);
     });
     builder.addCase(createTransaction.rejected, (store) => {
@@ -72,7 +78,7 @@ const transactionsSlice = createSlice<
     });
     builder.addCase(getTransactions.fulfilled, (store, { payload }) => {
       //   store.transactions.isLoading = false;
-      store.transactions = [payload, ...store.transactions];
+      store.transactions = payload;
     });
     builder.addCase(getTransactions.rejected, (store) => {
       //   store.transactions.isLoading = false;
@@ -85,6 +91,7 @@ const transactionsSlice = createSlice<
 export const transactionsActions = {
   ...transactionsSlice.actions,
   createTransaction,
+  getTransactions,
 };
 
 export default transactionsSlice.reducer;

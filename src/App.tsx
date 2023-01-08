@@ -10,6 +10,8 @@ import WalletBar from "./components/WalletsBar";
 import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import Layout from "./pages/Layout";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { transactionsActions } from "./redux/reducers/transactions";
 import { instanceTest } from "./services/api";
 
 const Main = styled.main`
@@ -17,10 +19,16 @@ const Main = styled.main`
 `;
 
 const App: React.FC = () => {
+  const transactions = useAppSelector((store) => store.transactions);
+
+  const dispatch = useAppDispatch();
+
   useEffect((): void => {
+    // instanceTest();
     console.log("testing...");
-    console.log(process.env.REACT_APP_SERVER_URL);
-    instanceTest();
+    console.log(`Server: ${process.env.REACT_APP_SERVER_URL}`);
+    dispatch(transactionsActions.getTransactions());
+    console.log(transactions);
   }, []);
 
   return (
