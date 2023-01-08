@@ -23,6 +23,7 @@ import * as React from "react";
 // import styled from "styled-components";
 
 import { useAppSelector } from "../redux/hooks";
+import { toLocalDate } from "../services/localDateTime";
 
 // const StyledTablePagination = styled(TablePagination)`
 //   display: flex;
@@ -274,7 +275,7 @@ const TransactionsTable = () => {
     (store) => store.user.userData.capital.wallets
   );
   const transactions = useAppSelector(
-    (store) => store.user.userData.capital.transactions
+    (state) => state.transactions.transactions.docs
   );
 
   const getWalletName = (id: string) => {
@@ -284,9 +285,10 @@ const TransactionsTable = () => {
   const rows = transactions.map((el) =>
     createData(
       el.id,
-      el.createdAt,
+      toLocalDate(el.createdAt),
       el.type,
-      getWalletName(el.walletId) || "",
+      // getWalletName(el.walletId) || "",
+      el.walletName,
       el.category,
       el.sum
     )

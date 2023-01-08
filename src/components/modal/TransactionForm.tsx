@@ -78,7 +78,8 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
       transactionsActions.createTransaction({
         ...data,
         id: nanoid(),
-        walletId: currentWalletId(data.walletId)?.id,
+        walletId: currentWalletId(data.walletName)?.id,
+        walletName: data.walletName,
         type: isSpend ? "витрати" : "прибуток",
         sum: isSpend ? -data.sum : +data.sum,
       })
@@ -96,7 +97,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
       <Input {...register("createdAt")} defaultValue={localDate} />
 
       <Label>Рахунок</Label>
-      <Select {...register("walletId")}>
+      <Select {...register("walletName")}>
         {wallets.map((wallet: any) => {
           return <option key={wallet.id}>{wallet.walletName}</option>;
         })}

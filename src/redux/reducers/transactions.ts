@@ -83,7 +83,6 @@ const transactionsSlice = createSlice<
     builder.addCase(getTransactions.rejected, (state) => {
       state.transactions.isLoading = false;
       state.transactions.error = "Failed to post transaction";
-      console.log("Failed to post transaction");
     });
   },
 });
