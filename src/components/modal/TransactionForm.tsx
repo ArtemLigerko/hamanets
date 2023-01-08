@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { nanoid } from "@reduxjs/toolkit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
@@ -8,7 +8,6 @@ import * as yup from "yup";
 import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { transactionsActions } from "../../redux/reducers/transactions";
-import { userActions } from "../../redux/reducers/user";
 import { localDate } from "../../services/localDateTime";
 import { ITransaction } from "../../types";
 import ModalUniversal from "./ModalUniversal";
@@ -57,23 +56,21 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
     (store) => store.user.userData.capital.wallets
   );
 
+  const transactions = useAppSelector((store) => store.transactions);
+
   const currentWalletId = (wallet: string) => {
     return wallets.find((item) => wallet === item.walletName);
   };
 
   // let toggleClose;
 
-  const onSubmit: SubmitHandler<ITransaction> = (data) => {
-    dispatch(
-      userActions.addTransaction({
-        ...data,
-        id: nanoid(),
-        walletId: currentWalletId(data.walletId)?.id,
-        type: isSpend ? "витрати" : "прибуток",
-        sum: isSpend ? -data.sum : +data.sum,
-      })
-    );
+  useEffect((): void => {
+    console.log("dispatching transactionsActions.getTransactions...");
+    dispatch(transactionsActions.getTransactions());
+    console.log(transactions);
+  }, []);
 
+  const onSubmit: SubmitHandler<ITransaction> = (data) => {
     dispatch(
       transactionsActions.createTransaction({
         ...data,

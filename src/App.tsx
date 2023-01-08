@@ -19,16 +19,10 @@ const Main = styled.main`
 `;
 
 const App: React.FC = () => {
-  const transactions = useAppSelector((store) => store.transactions);
-
   const dispatch = useAppDispatch();
 
   useEffect((): void => {
     // instanceTest();
-    console.log(`Server: ${process.env.REACT_APP_SERVER_URL}`);
-    console.log("dispatching transactionsActions.getTransactions...");
-    dispatch(transactionsActions.getTransactions());
-    console.log(transactions);
   }, []);
 
   return (
