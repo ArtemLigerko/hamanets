@@ -22,6 +22,14 @@ const transactionsInitialState: TransactionsStore = {
   transactions: initialState,
 };
 
+// const transactionsInitialState: TransactionsStore = {
+//   list: {
+//     docs: [],
+//     isLoading: false,
+//     error: undefined,
+//   },
+// };
+
 const createTransaction = createAsyncThunk<ITransaction, ITransaction>(
   "transaction/create",
   async (body) => {

@@ -17,8 +17,12 @@ const ConfirmUniversal = ({
 }: ConfirmProps) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleOkAndClose = () => {
+    handleOk();
+    setShow(false);
+  };
 
   return (
     <>
@@ -38,7 +42,7 @@ const ConfirmUniversal = ({
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleOk}>
+          <Button variant="primary" onClick={handleOkAndClose}>
             Ok
           </Button>
         </Modal.Footer>

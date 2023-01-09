@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { userActions } from "../redux/reducers/user";
+import { walletsActions } from "../redux/reducers/wallets";
 import { currencyFormat } from "../services/currencyFormat";
 import ConfirmUniversal from "./modal/ConfirmUniversal";
 
@@ -20,24 +21,21 @@ const StyledButton = styled(Button)`
 `;
 
 const Wallet: React.FC = () => {
-  const wallets = useAppSelector(
-    (store) => store.user.userData.capital.wallets
-  );
+  const wallets = useAppSelector((store) => store.wallets.wallets.docs);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(userActions.calcWalletTotal());
+    // dispatch(userActions.calcWalletTotal());
+    dispatch(walletsActions.getWallets());
   }, []);
 
   const handleDelWallet = (id: string): void => {
-    const walletIndex = wallets.findIndex((wallet) => wallet.id === id);
-    dispatch(userActions.delWallet(walletIndex));
+    dispatch(walletsActions.deleteWallets(id));
   };
 
   const handleEditWallet = (id: string): void => {
     const walletIndex = wallets.findIndex((wallet) => wallet.id === id);
-    // dispatch(userActions.delWallet(walletIndex));
   };
 
   const actionButton = (

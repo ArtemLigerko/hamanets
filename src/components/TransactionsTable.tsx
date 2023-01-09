@@ -271,23 +271,15 @@ const TransactionsTable = () => {
   // const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
 
-  const wallets = useAppSelector(
-    (store) => store.user.userData.capital.wallets
-  );
   const transactions = useAppSelector(
     (state) => state.transactions.transactions.docs
   );
-
-  const getWalletName = (id: string) => {
-    return wallets.find((item) => item.id === id)?.walletName;
-  };
 
   const rows = transactions.map((el) =>
     createData(
       el.id,
       toLocalDate(el.createdAt),
       el.type,
-      // getWalletName(el.walletId) || "",
       el.walletName,
       el.category,
       el.sum

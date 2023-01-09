@@ -19,6 +19,7 @@ export interface User {
 export interface IWallet {
   id: string;
   createdAt: string;
+  updatedAt: string;
   walletName: string;
   initialSum: number;
   total: number;

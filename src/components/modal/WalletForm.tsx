@@ -10,6 +10,7 @@ import * as yup from "yup";
 // import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { userActions } from "../../redux/reducers/user";
+import { walletsActions } from "../../redux/reducers/wallets";
 import { IWallet } from "../../types";
 import ModalUniversal from "./ModalUniversal";
 
@@ -74,11 +75,12 @@ const WalletForm = ({ title, button }: IWalletForm) => {
 
   const onSubmit: SubmitHandler<IWallet> = (data) => {
     dispatch(
-      userActions.addWallet({
+      walletsActions.createWallet({
         ...data,
         id: nanoid(),
-        total: data.initialSum,
         createdAt: new Date().toLocaleString(),
+        updatedAt: new Date().toLocaleString(),
+        total: data.initialSum,
       })
     );
     setShow(false);

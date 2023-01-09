@@ -31,7 +31,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route
-              path="/"
+              path="/wallets"
               element={
                 <>
                   <ToolsContainer>

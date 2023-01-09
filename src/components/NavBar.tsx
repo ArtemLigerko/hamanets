@@ -25,7 +25,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto" defaultActiveKey="/">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/wallets">
                 Гаманці
               </Nav.Link>
               <Nav.Link as={Link} to="/transactions">
