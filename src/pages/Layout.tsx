@@ -1,9 +1,8 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import NavBar from "../components/NavBar";
-import { ChildrenProps } from "../types";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -50,7 +49,7 @@ const Footer = styled.header`
   height: 40px;
 `;
 
-const Layout: React.FC<ChildrenProps> = () => {
+const Layout: React.FC<PropsWithChildren> = () => {
   return (
     <>
       <Window>

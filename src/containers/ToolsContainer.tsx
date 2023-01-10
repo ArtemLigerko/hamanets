@@ -1,7 +1,6 @@
+import { PropsWithChildren } from "react";
 import { Navbar } from "react-bootstrap";
 import styled from "styled-components";
-
-import { ChildrenProps } from "../types";
 
 const StyledToolsPanel = styled.header`
   background-color: #96daa5;
@@ -15,7 +14,7 @@ const Span = styled.header`
   margin: 0 5px;
 `;
 
-const ToolsContainer = ({ children }: ChildrenProps) => {
+const ToolsContainer = ({ children }: PropsWithChildren) => {
   return (
     <Navbar sticky="top">
       <StyledToolsPanel>

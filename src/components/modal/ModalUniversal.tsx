@@ -1,10 +1,10 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 
-import { StyledButton } from "../TransactionsBar";
+import ToolsbarButton from "../UI/ToolsbarButton/ToolsbarButton";
 
 interface ModalProps {
-  button?: string | JSX.Element;
+  button?: React.ReactNode;
   title?: string;
   content?: JSX.Element | null;
   footer?: JSX.Element | null;
@@ -24,9 +24,7 @@ const ModalUniversal = ({
 
   return (
     <>
-      <StyledButton variant="contained" onClick={handleShow}>
-        {button}
-      </StyledButton>
+      <ToolsbarButton onClick={handleShow}>{button}</ToolsbarButton>
 
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>

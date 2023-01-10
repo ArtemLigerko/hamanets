@@ -1,6 +1,10 @@
-export interface ChildrenProps {
-  children?: JSX.Element | JSX.Element[] | string | string[];
-}
+import React from "react";
+
+// export interface ChildrenProps {
+// children?: JSX.Element | JSX.Element[] | string | string[];
+// children?: React.ReactNode;
+// }
+// PropsWithChildren instead ChildrenProps
 
 export interface MongoArtifacts {
   _id: string;
@@ -16,7 +20,7 @@ export interface User {
   };
 }
 
-export interface IWallet {
+export interface IWallet extends MongoArtifacts {
   id: string;
   createdAt: string;
   updatedAt: string;

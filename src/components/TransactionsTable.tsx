@@ -261,15 +261,12 @@ const EnhancedTableHead = (props: EnhancedTableProps) => {
 // };
 
 const TransactionsTable = () => {
-  const [order, setOrder] = React.useState<Order>("asc");
+  const [order, setOrder] = React.useState<Order>("desc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("date");
-  const [
-    selected,
-    // setSelected
-  ] = React.useState<readonly string[]>([]);
+  const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
-  // const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [dense, setDense] = React.useState(false);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const transactions = useAppSelector(
     (state) => state.transactions.transactions.docs
@@ -283,18 +280,13 @@ const TransactionsTable = () => {
     createData(
       el.id,
       toLocalDate(el.createdAt),
+      // el.createdAt,
       el.type,
       el.walletName,
       el.category,
       el.sum
     )
   );
-
-  // console.log(rows);
-
-  // const rows = [
-  //   createData("1", "01.03.2022", "Прибуток", "Готівка", "Обув", 100),
-  // ];
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,

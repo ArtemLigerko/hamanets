@@ -1,8 +1,6 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
-
-import { ChildrenProps } from "../types";
 
 const StyledContainer = styled(Container)`
   display: flex;
@@ -10,7 +8,7 @@ const StyledContainer = styled(Container)`
   padding: 10px;
 `;
 
-const DataContainer = ({ children }: ChildrenProps) => {
+const DataContainer = ({ children }: PropsWithChildren) => {
   return (
     <>
       <StyledContainer>{children}</StyledContainer>

@@ -39,7 +39,7 @@ interface ISpendingForm {
 const schema = yup
   .object()
   .shape({
-    createdAt: yup.string().required("Please, enter a valid date"),
+    // createdAt: yup.string().required("Please, enter a valid date"),
     sum: yup.number().required("Enter number"),
   })
   .required();
@@ -94,8 +94,8 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
 
   const SpendingForm = (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Label>Дата</Label>
-      <Input {...register("createdAt")} defaultValue={localDate} />
+      {/* <Label>Дата</Label> */}
+      {/* <Input {...register("createdAt")} defaultValue={Date.now()} /> */}
 
       <Label>Рахунок</Label>
       <Select {...register("walletName")}>
