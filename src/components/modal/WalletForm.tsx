@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorRounded } from "@mui/icons-material";
 import { nanoid } from "@reduxjs/toolkit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
@@ -72,6 +72,10 @@ const WalletForm = ({ title, button }: IWalletForm) => {
   // const currentWalletId = (wallet: string) => {
   //   return wallets.find((item) => wallet === item.walletName);
   // };
+
+  // useEffect((): void => {
+  //   dispatch(walletsActions.getWallets());
+  // }, []);
 
   const onSubmit: SubmitHandler<IWallet> = (data) => {
     dispatch(

@@ -19,7 +19,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 // import Tooltip from "@mui/material/Tooltip";
 // import Typography from "@mui/material/Typography";
 import { visuallyHidden } from "@mui/utils";
-import * as React from "react";
+import React, { memo } from "react";
 // import styled from "styled-components";
 
 import { useAppSelector } from "../redux/hooks";
@@ -275,6 +275,10 @@ const TransactionsTable = () => {
     (state) => state.transactions.transactions.docs
   );
 
+  const transactionsError = useAppSelector(
+    (state) => state.transactions.transactions.error
+  );
+
   const rows = transactions.map((el) =>
     createData(
       el.id,
@@ -353,97 +357,112 @@ const TransactionsTable = () => {
 
   return (
     <Box sx={{ maxWidth: 1024 }}>
-      <Paper elevation={5} sx={{ width: "100%", mb: 2 }}>
-        {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
-        {/* <FormControlLabel
+      {transactions.length ? (
+        <Paper elevation={5} sx={{ width: "100%", mb: 2 }}>
+          {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+          {/* <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
           label="Dense padding"
         /> */}
-        <TableContainer sx={{ maxHeight: 600 }}>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            // sx={{ maxWidth: 750 }}
-            aria-labelledby="tableTitle"
-            // size={dense ? "small" : "medium"}
-            size={"small"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+          <TableContainer sx={{ maxHeight: 600 }}>
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              // sx={{ maxWidth: 750 }}
+              aria-labelledby="tableTitle"
+              // size={dense ? "small" : "medium"}
+              size={"small"}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                // onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.sort(getComparator(order, orderBy)).slice() */}
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.date);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.date);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      // onClick={(event) => handleClick(event, row.date)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        {/* <Checkbox
+                    return (
+                      <TableRow
+                        hover
+                        // onClick={(event) => handleClick(event, row.date)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.id}
+                        selected={isItemSelected}
+                      >
+                        <TableCell padding="checkbox">
+                          {/* <Checkbox
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
                             "aria-labelledby": labelId,
                           }}
                         /> */}
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.date}
-                      </TableCell>
-                      <TableCell align="left">{row.type}</TableCell>
-                      <TableCell align="left">{row.account}</TableCell>
-                      <TableCell align="left">{row.category}</TableCell>
-                      <TableCell align="right">{row.sum}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    // height: (dense ? 33 : 53) * emptyRows,
-                    height: 33 * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 50, { value: -1, label: "All" }]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          {row.date}
+                        </TableCell>
+                        <TableCell align="left">{row.type}</TableCell>
+                        <TableCell align="left">{row.account}</TableCell>
+                        <TableCell align="left">{row.category}</TableCell>
+                        <TableCell align="right">{row.sum}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      // height: (dense ? 33 : 53) * emptyRows,
+                      height: 33 * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[
+              10, 20, 50, 100,
+              // { value: -1, label: "All" }
+            ]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      ) : (
+        <div>
+          <div>No transations</div>
+          {/* <div>
+            {transactionsError
+              ? "Failed to get transactions from server"
+              : "No transations"}
+          </div> */}
+          {/* <div>{`${transactionsError}`}</div> */}
+        </div>
+      )}
     </Box>
   );
 };
 
-export default TransactionsTable;
+export default memo(TransactionsTable);

@@ -39,25 +39,33 @@ const createWallet = createAsyncThunk<IWallet, IWallet>(
 );
 
 const getWallets = createAsyncThunk<IWallet[]>("wallets/get", async () => {
-  try {
-    const response = await instance.get("api/wallets");
-    return response.data;
-  } catch (e) {
-    console.log(e);
-  }
+  const response = await instance.get("api/wallets");
+  return response.data;
 });
 
 const deleteWallets = createAsyncThunk<Pagination<IWallet>, string>(
   "wallets/del",
   async (id) => {
-    try {
-      const response = await instance.delete(`api/wallets/${id}`);
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
+    const response = await instance.delete(`api/wallets/${id}`);
+    return response.data;
   }
 );
+
+interface AddTransactionSumRequest {
+  walletId: string | undefined;
+  transactionSum: number;
+}
+
+const addTransactionSum = createAsyncThunk<
+  Pagination<IWallet>,
+  AddTransactionSumRequest
+>("wallets/addTransactionSum", async ({ walletId, transactionSum }) => {
+  const response = await instance.put(`api/wallets/`, {
+    id: walletId,
+    total: transactionSum,
+  });
+  return response.data;
+});
 
 const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
   {
@@ -113,6 +121,24 @@ const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
         state.wallets.isLoading = false;
         state.wallets.error = "Failed to post wallet";
       });
+
+      builder.addCase(addTransactionSum.pending, (state) => {
+        state.wallets.isLoading = true;
+      });
+      builder.addCase(addTransactionSum.fulfilled, (state, { payload }) => {
+        state.wallets.isLoading = false;
+
+        // console.log("creating wallets...");
+        // console.log(payload);
+
+        // console.log("adding created wallets to state...");
+        // state.wallets.docs.push(payload);
+        // console.log(current(state));
+      });
+      builder.addCase(addTransactionSum.rejected, (state) => {
+        state.wallets.isLoading = false;
+        console.warn("Failed to post wallet");
+      });
     },
   }
 );
@@ -122,6 +148,7 @@ export const walletsActions = {
   createWallet,
   getWallets,
   deleteWallets,
+  addTransactionSum,
 };
 
 export default walletsSlice.reducer;

@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { transactionsActions } from "../../redux/reducers/transactions";
+import { walletsActions } from "../../redux/reducers/wallets";
 import { localDate } from "../../services/localDateTime";
 import { ITransaction } from "../../types";
 import ModalUniversal from "./ModalUniversal";
@@ -52,35 +53,38 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
 
   const dispatch = useAppDispatch();
 
-  const wallets = useAppSelector(
-    (store) => store.user.userData.capital.wallets
-  );
+  const wallets = useAppSelector((store) => store.wallets.wallets.docs);
 
   const transactions = useAppSelector((store) => store.transactions);
 
   const currentWalletId = (wallet: string) => {
-    return wallets.find((item) => wallet === item.walletName);
+    return wallets.find((item) => wallet === item.walletName)?.id;
   };
 
   // let toggleClose;
 
-  useEffect((): void => {
-    console.log("dispatching transactionsActions.getTransactions...");
-    dispatch(transactionsActions.getTransactions());
-    console.log(transactions);
-  }, []);
+  // useEffect((): void => {
+  //   console.log("dispatching transactionsActions.getTransactions...");
+  //   dispatch(transactionsActions.getTransactions());
+  //   console.log(transactions);
+  // }, []);
 
   const onSubmit: SubmitHandler<ITransaction> = (data) => {
+    const walletId = currentWalletId(data.walletName);
+    const transactionSum = isSpend ? -data.sum : +data.sum;
+
     dispatch(
       transactionsActions.createTransaction({
         ...data,
         id: nanoid(),
-        walletId: currentWalletId(data.walletName)?.id,
+        walletId: walletId,
         walletName: data.walletName,
         type: isSpend ? "витрати" : "прибуток",
-        sum: isSpend ? -data.sum : +data.sum,
+        sum: transactionSum,
       })
     );
+
+    dispatch(walletsActions.addTransactionSum({ walletId, transactionSum }));
 
     reset();
     setShow(false);

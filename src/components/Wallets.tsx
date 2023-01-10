@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { Button, Card, Container, Row } from "react-bootstrap";
 import { PencilSquare, XSquare } from "react-bootstrap-icons";
 import styled from "styled-components";
@@ -94,4 +94,4 @@ const Wallet: React.FC = () => {
   );
 };
 
-export default Wallet;
+export default memo(Wallet);

@@ -41,12 +41,8 @@ const createTransaction = createAsyncThunk<ITransaction, ITransaction>(
 const getTransactions = createAsyncThunk<ITransaction[]>(
   "transactions/get",
   async () => {
-    try {
-      const response = await instance.get("api/transactions");
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
+    const response = await instance.get("api/transactions");
+    return response.data;
   }
 );
 
@@ -64,12 +60,12 @@ const transactionsSlice = createSlice<
     builder.addCase(createTransaction.fulfilled, (state, { payload }) => {
       state.transactions.isLoading = false;
 
-      console.log("creating transactions...");
-      console.log(payload);
+      // console.log("creating transactions...");
+      // console.log(payload);
 
-      console.log("adding created transactions to state...");
+      // console.log("adding created transactions to state...");
       state.transactions.docs.push(payload);
-      console.log(current(state));
+      // console.log(current(state));
     });
     builder.addCase(createTransaction.rejected, (state) => {
       state.transactions.isLoading = false;
@@ -90,7 +86,7 @@ const transactionsSlice = createSlice<
     });
     builder.addCase(getTransactions.rejected, (state) => {
       state.transactions.isLoading = false;
-      state.transactions.error = "Failed to post transaction";
+      state.transactions.error = "Failed to get transaction";
     });
   },
 });

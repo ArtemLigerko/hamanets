@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,21 +9,12 @@ import WalletBar from "./components/WalletsBar";
 import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import Layout from "./pages/Layout";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
-import { transactionsActions } from "./redux/reducers/transactions";
-import { instanceTest } from "./services/api";
 
 const Main = styled.main`
   width: 100%;
 `;
 
 const App: React.FC = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect((): void => {
-    // instanceTest();
-  }, []);
-
   return (
     <Main>
       <BrowserRouter>
