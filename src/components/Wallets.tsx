@@ -59,13 +59,13 @@ const Wallet: React.FC = () => {
                   </div>
 
                   <div className="d-flex justify-content-center align-items-center">
-                    <StyledButton
+                    {/* <StyledButton
                       className="p-0 mx-1 d-flex justify-content-center align-items-center"
                       variant="primary"
                       onClick={() => handleEditWallet(wallet.id)}
                     >
                       <PencilSquare />
-                    </StyledButton>
+                    </StyledButton> */}
                     <ConfirmUniversal
                       actionButton={actionButton}
                       title="Видалення рахунку!"

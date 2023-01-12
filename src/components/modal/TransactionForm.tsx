@@ -40,12 +40,21 @@ const schema = yup
   .object()
   .shape({
     // createdAt: yup.string().required("Please, enter a valid date"),
-    sum: yup.number().required("Enter number"),
+    walletName: yup.string().required("Потрібно вказати рахунок"),
+    sum: yup
+      .number()
+      .moreThan(-0.99, `Сумма повинна бути позитивною або "0"`)
+      .required("Введіть сумму"),
   })
   .required();
 
 const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
-  const { register, handleSubmit, reset } = useForm<ITransaction>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ITransaction>({
     resolver: yupResolver(schema),
   });
 
@@ -71,7 +80,8 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
 
   const onSubmit: SubmitHandler<ITransaction> = (data) => {
     const walletId = currentWalletId(data.walletName);
-    const transactionSum = isSpend ? -data.sum : +data.sum;
+    const transactionSum =
+      Math.round((isSpend ? -data.sum : +data.sum) * 100) / 100;
 
     dispatch(
       transactionsActions.createTransaction({
@@ -103,6 +113,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
           return <option key={wallet.id}>{wallet.walletName}</option>;
         })}
       </Select>
+      {errors.walletName && <p>{errors?.walletName.message}</p>}
 
       <Label>Стаття</Label>
       <Select {...register("category")}>
@@ -117,6 +128,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
 
       <Label>Сума</Label>
       <Input {...register("sum")} />
+      {errors.sum && <p>{errors?.sum.message}</p>}
 
       <Input type="submit" value="Зберегти" />
     </StyledForm>
