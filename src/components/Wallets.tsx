@@ -4,7 +4,6 @@ import { PencilSquare, XSquare } from "react-bootstrap-icons";
 import styled from "styled-components";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { userActions } from "../redux/reducers/user";
 import { walletsActions } from "../redux/reducers/wallets";
 import { currencyFormat } from "../services/currencyFormat";
 import ConfirmUniversal from "./modal/ConfirmUniversal";
@@ -26,7 +25,6 @@ const Wallet: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // dispatch(userActions.calcWalletTotal());
     dispatch(walletsActions.getWallets());
   }, []);
 

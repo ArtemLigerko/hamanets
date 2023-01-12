@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 // export interface ChildrenProps {
 // children?: JSX.Element | JSX.Element[] | string | string[];
@@ -31,7 +31,7 @@ export interface IWallet extends MongoArtifacts {
 
 export interface ITransaction extends MongoArtifacts {
   id: string;
-  walletId: string | any;
+  walletId: string | undefined;
   walletName: string;
   createdAt: string;
   type: string;

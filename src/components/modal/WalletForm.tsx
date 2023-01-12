@@ -9,7 +9,6 @@ import * as yup from "yup";
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { userActions } from "../../redux/reducers/user";
 import { walletsActions } from "../../redux/reducers/wallets";
 import { IWallet } from "../../types";
 import ModalUniversal from "./ModalUniversal";
