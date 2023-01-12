@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Container, Row } from "react-bootstrap";
 import { PencilSquare, XSquare } from "react-bootstrap-icons";
 import styled from "styled-components";
@@ -28,8 +28,9 @@ const Wallet: React.FC = () => {
     dispatch(walletsActions.getWallets());
   }, []);
 
-  const handleDelWallet = (id: string): void => {
-    dispatch(walletsActions.deleteWallets(id));
+  const handleDelWallet = async (id: string) => {
+    await dispatch(walletsActions.deleteWallets(id));
+    dispatch(walletsActions.getWallets());
   };
 
   const handleEditWallet = (id: string): void => {
@@ -92,4 +93,4 @@ const Wallet: React.FC = () => {
   );
 };
 
-export default memo(Wallet);
+export default Wallet;
