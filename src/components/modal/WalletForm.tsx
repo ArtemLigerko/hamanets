@@ -6,8 +6,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
 
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import { revenueCategoryList, spendCategoryList } from "../../lists";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { walletsActions } from "../../redux/reducers/wallets";
 import { IWallet } from "../../types";
@@ -63,10 +61,6 @@ const WalletForm = ({ title, button }: IWalletForm) => {
   const [show, setShow] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-
-  // const wallets = useAppSelector(
-  //   (store) => store.user.userData.capital.wallets
-  // );
 
   // const currentWalletId = (wallet: string) => {
   //   return wallets.find((item) => wallet === item.walletName);

@@ -12,3 +12,20 @@ export const toLocalDate = (iSOStringOrDate: string | Date) => {
     return iSOStringOrDate.toLocaleDateString();
   }
 };
+
+export const toLocalDateAndTime = (iSOStringOrDate: string | Date) => {
+  if (typeof iSOStringOrDate === "string") {
+    const dateTimetoString = new Date(iSOStringOrDate);
+    return (
+      dateTimetoString.toLocaleDateString() +
+      ", " +
+      dateTimetoString.toLocaleTimeString()
+    );
+  } else {
+    return (
+      iSOStringOrDate.toLocaleDateString() +
+      " " +
+      iSOStringOrDate.toLocaleTimeString()
+    );
+  }
+};

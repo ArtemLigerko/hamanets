@@ -19,11 +19,12 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 // import Tooltip from "@mui/material/Tooltip";
 // import Typography from "@mui/material/Typography";
 import { visuallyHidden } from "@mui/utils";
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 // import styled from "styled-components";
 
-import { useAppSelector } from "../redux/hooks";
-import { toLocalDate } from "../services/localDateTime";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { transactionsActions } from "../redux/reducers/transactions";
+import { toLocalDate, toLocalDateAndTime } from "../services/localDateTime";
 
 // const StyledTablePagination = styled(TablePagination)`
 //   display: flex;
@@ -268,6 +269,12 @@ const TransactionsTable = () => {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(transactionsActions.getTransactions());
+  }, []);
+
   const transactions = useAppSelector(
     (state) => state.transactions.transactions.docs
   );
@@ -279,8 +286,8 @@ const TransactionsTable = () => {
   const rows = transactions.map((el) =>
     createData(
       el.id,
-      toLocalDate(el.createdAt),
-      // el.createdAt,
+      // toLocalDate(el.createdAt),
+      toLocalDateAndTime(el.createdAt),
       el.type,
       el.walletName,
       el.category,

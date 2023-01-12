@@ -34,6 +34,7 @@ export interface ITransaction extends MongoArtifacts {
   walletId: string | undefined;
   walletName: string;
   createdAt: string;
+  // updatedAt: string;
   type: string;
   category: string;
   sum: number;
