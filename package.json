@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@hookform/resolvers": "^2.9.10",
@@ -22,6 +23,7 @@
     "bootstrap-icons": "^1.10.2",
     "datatables.net": "^1.12.1",
     "datatables.net-bs5": "^1.12.1",
+    "framer-motion": "^8.5.4",
     "jquery": "^3.6.1",
     "nanoid": "^4.0.0",
     "npm": "^8.19.2",

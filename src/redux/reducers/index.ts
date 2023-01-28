@@ -2,9 +2,9 @@
 import { combineReducers } from "redux";
 
 import transactionsSlice from "./transactions";
-import walletsSlise from "./wallets";
+import walletsSlice from "./wallets";
 
 export const rootReducer = combineReducers({
   transactions: transactionsSlice,
-  wallets: walletsSlise,
+  wallets: walletsSlice,
 });
