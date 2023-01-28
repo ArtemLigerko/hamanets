@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import NavBar from "../components/NavBar";
+import NavBarchakra from "../components/NavBar.chakra";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -54,6 +55,7 @@ const Layout: React.FC<PropsWithChildren> = () => {
     <>
       <Window>
         <NavBar />
+        <NavBarchakra />
         <Main>
           {/* <LeftMenu>
             <Calendar>Calendar</Calendar>

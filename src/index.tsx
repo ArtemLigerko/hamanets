@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import $ from "jquery";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -33,11 +34,13 @@ $(document).ready(() => {
 
 root.render(
   // <React.StrictMode>
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <GlobalStyles />
-      <App />
-    </PersistGate>
-  </Provider>
+  <ChakraProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <GlobalStyles />
+        <App />
+      </PersistGate>
+    </Provider>
+  </ChakraProvider>
   // </React.StrictMode>
 );

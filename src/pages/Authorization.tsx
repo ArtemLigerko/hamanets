@@ -1,8 +1,18 @@
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  Button,
+  Text,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 
 const Main = styled.main`
-  /* background-color: #00000045; */
+  background-color: #00000035;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -10,34 +20,41 @@ const Main = styled.main`
 `;
 
 const Form = styled.form`
-  background-color: #a8e2fd;
-  display: flex;
+  background-color: #ffffff;
+  /* display: flex; */
   flex-direction: column;
-  width: 300px;
-  border: solid 1px rgba(0, 0, 0, 0.3);
-  padding: 5px;
+  padding: 15px;
+  width: 400px;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 `;
 
-const Field = styled.div`
+const InputWrapper = styled.div`
+  margin-bottom: 30px;
+`;
+
+const ButtonWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: 10px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 `;
 
-const Input = styled.input`
-  /* margin-bottom: 10px; */
+const StyledButton = styled(Button)`
+  width: 130px;
 `;
 
-const Label = styled.label`
-  /* margin: 0 5px; */
+const StyledText = styled(Text)`
+  margin: 0 30px;
 `;
 
 type Inputs = {
-  example: string;
-  exampleRequired: string;
+  username: string;
+  password: string;
 };
 
 const Authorization = () => {
+  const [submit, setSubmit] = useState("login");
   const {
     register,
     handleSubmit,
@@ -46,26 +63,49 @@ const Authorization = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  console.log(watch("example")); // watch input value by passing the name of it
+  // console.log(watch("username")); // watch input value by passing the name of it
 
   return (
-    <Main>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Field>
-          <Label>Ваше ім'я</Label>
-          <Input defaultValue="test" {...register("example")} />
-        </Field>
-
-        <Field>
-          <Input {...register("exampleRequired", { required: true })} />
-          {errors.exampleRequired && <span>This field is required</span>}
-        </Field>
-
-        <Field>
-          <Input type="submit" />
-        </Field>
-      </Form>
-    </Main>
+    <>
+      <Main>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl>
+            <InputWrapper>
+              <FormLabel>Name</FormLabel>
+              <Input id="login" type="text" {...register("username")} />
+              <FormHelperText>Enter your name for registration</FormHelperText>
+            </InputWrapper>
+            <InputWrapper>
+              <FormLabel>Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+              />
+              <FormHelperText>Enter password for registration</FormHelperText>
+            </InputWrapper>
+          </FormControl>
+          <ButtonWrapper>
+            <StyledButton
+              colorScheme="blue"
+              type="submit"
+              onClick={() => setSubmit("login")}
+            >
+              Login
+            </StyledButton>
+            <StyledText>or</StyledText>
+            <StyledButton
+              colorScheme="blue"
+              variant="outline"
+              type="submit"
+              onClick={() => setSubmit("register")}
+            >
+              Register
+            </StyledButton>
+          </ButtonWrapper>
+        </Form>
+      </Main>
+    </>
   );
 };
 
