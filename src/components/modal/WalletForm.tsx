@@ -1,54 +1,48 @@
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ErrorRounded } from "@mui/icons-material";
-import { nanoid } from "@reduxjs/toolkit";
-import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
+import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import styled from "styled-components";
 import * as yup from "yup";
 
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { walletsActions } from "../../redux/reducers/wallets";
 import { IWallet } from "../../types";
-import ModalUniversal from "./ModalUniversal";
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label`
-  /* margin: 5px 0; */
-`;
-
-const Input = styled.input`
-  margin: 0 0 10px 0;
-`;
-
-// const Select = styled.select`
-//   margin: 0 0 10px 0;
-// `;
-
-interface IWalletForm {
-  title: string;
-  button: string;
-}
 
 const schema = yup
   .object()
   .shape({
-    // createdAt: yup.date().required(),
     walletName: yup.string().required("Введіть назву рахунку"),
     initialSum: yup
       .number()
       .typeError("Повинно бути число")
       .nullable()
       .min(0, "Сумма повинна бути позитивна чи 0")
-      // .round("round")
       .required("Введіть число"),
   })
   .required("hh");
 
-const WalletForm = ({ title, button }: IWalletForm) => {
+const WalletForm = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
+
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -58,61 +52,72 @@ const WalletForm = ({ title, button }: IWalletForm) => {
     resolver: yupResolver(schema),
   });
 
-  const [show, setShow] = useState<boolean>(false);
-
-  const dispatch = useAppDispatch();
-
-  // const currentWalletId = (wallet: string) => {
-  //   return wallets.find((item) => wallet === item.walletName);
-  // };
-
-  // useEffect((): void => {
-  //   dispatch(walletsActions.getWallets());
-  // }, []);
-
   const onSubmit: SubmitHandler<IWallet> = (data) => {
+    console.log(data);
     dispatch(
       walletsActions.createWallet({
         ...data,
         id: nanoid(),
-        createdAt: new Date().toLocaleString(),
-        updatedAt: new Date().toLocaleString(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         total: data.initialSum,
       })
     );
-    setShow(false);
+    onClose();
   };
-
-  // let i = 0;
-
-  const AddWallet = (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      {/* <Label>Дата створення</Label>
-      <Input {...register("createdAt")} defaultValue={localDate} type="date" />
-    {errors.createdAt && <p>{errors?.createdAt.message}</p>} */}
-      <Label>Дата створення: {new Date().toLocaleString()}</Label>
-
-      <Label>Назва рахунку</Label>
-      <Input {...register("walletName")} type="text" />
-      {errors.walletName && <p>{errors?.walletName.message}</p>}
-
-      <Label>Сума на рахунку</Label>
-      <Input {...register("initialSum")} defaultValue={0} />
-      {errors.initialSum && <p>{errors?.initialSum.message}</p>}
-
-      <Input type="submit" value="Зберегти" />
-    </StyledForm>
-  );
 
   return (
     <>
-      <ModalUniversal
-        title={title}
-        button={button}
-        content={AddWallet}
-        show={show}
-        setShow={setShow}
-      />
+      <Button onClick={onOpen} size="sm">
+        New wallet
+      </Button>
+      {/* <Button ml={4} ref={finalRef}>
+        I'll receive focus on close
+      </Button> */}
+
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Додайте новий рахунок</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <form>
+              <FormControl>
+                <FormLabel>Назва рахунку</FormLabel>
+                <Input
+                  // ref={initialRef}
+                  placeholder="Рахунок"
+                  // defaultValue="Новий рахунок"
+                  type="text"
+                  {...register("walletName")}
+                />
+                {errors.walletName && <p>{errors?.walletName.message}</p>}
+              </FormControl>
+
+              <FormControl mt={4}>
+                <FormLabel>Сума на рахунку</FormLabel>
+                <Input
+                  placeholder="Сумма"
+                  defaultValue={0}
+                  {...register("initialSum")}
+                />
+                {errors.initialSum && <p>{errors?.initialSum.message}</p>}
+              </FormControl>
+            </form>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleSubmit(onSubmit)}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
