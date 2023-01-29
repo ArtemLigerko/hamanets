@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 import NavBar from "../components/NavBar";
-import NavBarchakra from "../components/NavBar.chakra";
 
 const Window = styled.div`
   /* background-color: #ffffff; */
@@ -19,7 +18,7 @@ const Main = styled.div`
 `;
 
 const Center = styled.div`
-  background-color: #d4d4d4;
+  /* background-color: #d4d4d4; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -36,8 +35,7 @@ const Layout: React.FC<PropsWithChildren> = () => {
   return (
     <>
       <Window>
-        {/* <NavBar /> */}
-        <NavBarchakra />
+        <NavBar />
         <Main>
           <Center>
             <main>

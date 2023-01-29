@@ -1,43 +1,43 @@
-import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Button,
+  Flex,
+  Text,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-const StyledNavbar = styled(Navbar)`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Span = styled.span`
-  padding: 0 60px;
-`;
 
 const NavBar = () => {
   return (
     <>
-      <StyledNavbar bg="light" expand="sm" sticky="top">
-        <Container fluid>
-          <Span>
-            <Navbar.Brand as={Link} to="/">
-              Hamanec
-            </Navbar.Brand>
-          </Span>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto" defaultActiveKey="/">
-              <Nav.Link as={Link} to="/wallets">
-                Гаманці
-              </Nav.Link>
-              <Nav.Link as={Link} to="/transactions">
-                Транзакції
-              </Nav.Link>
-              <Nav.Link as={Link} to="/report">
-                Звіти
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </StyledNavbar>
+      <Flex align="center" justify="space-between">
+        <Breadcrumb separator="-" my="1" ml="5">
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/wallets">
+              <Text fontSize="2xl">Гаманці</Text>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/transactions">
+              <Text fontSize="2xl">Транзакції</Text>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/report">
+              <Text fontSize="2xl">Звіти</Text>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <Flex align="center">
+          <Text mr="5">Username</Text>
+          <Button size="sm" mx="2" colorScheme="blue">
+            Logout
+          </Button>
+        </Flex>
+      </Flex>
     </>
   );
 };
