@@ -3,8 +3,7 @@ import styled from "styled-components";
 
 import NotFound404 from "./components/NotFound404";
 import TransactionsBar from "./components/TransactionsBar";
-import TransactionsTable from "./components/TransactionsTable";
-import TransactionsTableChakra from "./components/TransactionsTable.chakra";
+import TransactionsTableChakra from "./components/TransactionsTable";
 import Wallets from "./components/Wallets";
 import WalletBar from "./components/WalletsBar";
 import DataContainer from "./containers/DataCotrainer";
