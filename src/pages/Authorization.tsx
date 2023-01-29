@@ -22,7 +22,7 @@ const Main = styled.main`
 const Form = styled.form`
   background-color: #ffffff;
   /* display: flex; */
-  flex-direction: column;
+  /* flex-direction: column; */
   padding: 15px;
   width: 400px;
   border: solid 1px rgba(0, 0, 0, 0.1);
@@ -36,12 +36,13 @@ const InputWrapper = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 `;
 
 const StyledButton = styled(Button)`
-  width: 130px;
+  width: 100%;
+  margin: 10px 0;
 `;
 
 const StyledText = styled(Text)`
@@ -69,11 +70,12 @@ const Authorization = () => {
     <>
       <Main>
         <Form onSubmit={handleSubmit(onSubmit)}>
+          {/* <Text fontSize="4xl">Welcome!</Text> */}
           <FormControl>
             <InputWrapper>
               <FormLabel>Name</FormLabel>
               <Input id="login" type="text" {...register("username")} />
-              <FormHelperText>Enter your name for registration</FormHelperText>
+              <FormHelperText>Enter your name</FormHelperText>
             </InputWrapper>
             <InputWrapper>
               <FormLabel>Password</FormLabel>
@@ -82,7 +84,7 @@ const Authorization = () => {
                 type="password"
                 {...register("password", { required: true })}
               />
-              <FormHelperText>Enter password for registration</FormHelperText>
+              <FormHelperText>Enter password</FormHelperText>
             </InputWrapper>
           </FormControl>
           <ButtonWrapper>
