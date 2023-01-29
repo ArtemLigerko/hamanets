@@ -1,23 +1,24 @@
-// import Button from "@mui/material/Button";
+import { Button, Stack } from "@chakra-ui/react";
 
 import TransactionForm from "./modal/TransactionForm";
-import ToolsbarButton from "./UI/ToolsbarButton/ToolsbarButton";
 
 const TransactionsBar = () => {
   return (
     <>
-      <TransactionForm
-        title="Введіть витрати"
-        button="Додати витрати"
-        isSpend
-      />
-      <TransactionForm
-        title="Введіть прибуток"
-        button="Додати прибуток"
-        isSpend={false}
-      />
-      <button>Видалити всі транзакції</button>
-      {/* <ToolsbarButton>Видалити всі транзакції</ToolsbarButton> */}
+      <Stack spacing="2" direction="row" align="center">
+        <TransactionForm
+          title="Введіть витрати"
+          button="Додати витрати"
+          isSpend
+        />
+        <TransactionForm
+          title="Введіть прибуток"
+          button="Додати прибуток"
+          isSpend={false}
+        />
+        <Button size="sm">Видалити всі транзакції</Button>
+        {/* <ToolsbarButton>Видалити всі транзакції</ToolsbarButton> */}
+      </Stack>
     </>
   );
 };

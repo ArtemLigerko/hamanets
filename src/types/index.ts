@@ -22,8 +22,8 @@ export interface User {
 
 export interface IWallet extends MongoArtifacts {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
   walletName: string;
   initialSum: number;
   total: number;

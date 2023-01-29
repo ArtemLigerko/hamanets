@@ -25,8 +25,9 @@ const ModalUniversal = ({
 
   return (
     <>
-      {/* <ToolsbarButton onClick={handleShow}>{button}</ToolsbarButton> */}
-      <Button onClick={handleShow}>{button}</Button>
+      <Button size="sm" onClick={handleShow}>
+        {button}
+      </Button>
 
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>

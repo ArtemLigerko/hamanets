@@ -33,7 +33,7 @@ const NavBar = () => {
         </Breadcrumb>
         <Flex align="center">
           <Text mr="5">Username</Text>
-          <Button size="sm" mx="2" colorScheme="blue">
+          <Button size="sm" mr="8" colorScheme="blue">
             Logout
           </Button>
         </Flex>

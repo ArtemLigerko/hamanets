@@ -33,6 +33,7 @@ const walletsInitialState: WalletsStore = {
 const createWallet = createAsyncThunk<IWallet, IWallet>(
   "wallet/create",
   async (body) => {
+    console.log(body);
     const response = await instance.post("api/wallets", body);
     return response.data;
   }

@@ -42,14 +42,21 @@ const TransactionsTableChakra = () => {
     );
   };
 
+  //colorScheme
+  //"whiteAlpha" | "blackAlpha" | "gray" | "red" | "orange" | "yellow" |
+  //"green" | "teal" | "blue" | "cyan" | "purple" | "pink" | "linkedin" |
+  //"facebook" | "messenger" | "whatsapp" | "twitter" | "telegram"
+
   return (
     <>
       <TableContainer>
         <TableContainer>
-          <Table variant="striped" colorScheme="teal" size="sm">
-            <TableCaption>Imperial to metric conversion factors</TableCaption>
+          <Table variant="striped" colorScheme="facebook" size="sm">
+            <TableCaption>TableCaption</TableCaption>
+            <Thead>
+              <TableHead />
+            </Thead>
 
-            <TableHead />
             <Tbody>
               {transactions.map((el) => {
                 return (
