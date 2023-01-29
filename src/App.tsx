@@ -21,7 +21,7 @@ const App: React.FC = () => {
     <Main>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Authorization />} />
+          {/* <Route path="/" element={<Authorization />} /> */}
           <Route path="/" element={<Layout />}>
             <Route
               path="/wallets"

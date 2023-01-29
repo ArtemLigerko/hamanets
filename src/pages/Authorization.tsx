@@ -12,6 +12,11 @@ import {
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+const ButtonStyle = {
+  width: "100%",
+  margin: "10px 0",
+};
+
 type Inputs = {
   username: string;
   password: string;
@@ -59,8 +64,7 @@ const Authorization = () => {
           </FormControl>
           <Flex direction="column" align="center">
             <Button
-              w="100%"
-              my="10px"
+              sx={ButtonStyle}
               colorScheme="blue"
               type="submit"
               onClick={() => setSubmit("login")}
@@ -69,10 +73,9 @@ const Authorization = () => {
             </Button>
             <Text>or</Text>
             <Button
-              w="100%"
-              my="10px"
-              colorScheme="blue"
+              sx={ButtonStyle}
               variant="outline"
+              colorScheme="blue"
               type="submit"
               onClick={() => setSubmit("register")}
             >

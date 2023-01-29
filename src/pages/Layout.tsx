@@ -36,7 +36,7 @@ const Layout: React.FC<PropsWithChildren> = () => {
   return (
     <>
       <Window>
-        <NavBar />
+        {/* <NavBar /> */}
         <NavBarchakra />
         <Main>
           <Center>
