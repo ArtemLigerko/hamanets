@@ -1,5 +1,6 @@
+import { Button } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { Button, Card, Container, Row } from "react-bootstrap";
+import { Card, Container, Row } from "react-bootstrap";
 import { PencilSquare, XSquare } from "react-bootstrap-icons";
 import styled from "styled-components";
 

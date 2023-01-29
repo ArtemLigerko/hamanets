@@ -6,48 +6,11 @@ import {
   Input,
   Button,
   Text,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import styled from "styled-components";
-
-const Main = styled.main`
-  background-color: #00000035;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Form = styled.form`
-  background-color: #ffffff;
-  /* display: flex; */
-  /* flex-direction: column; */
-  padding: 15px;
-  width: 400px;
-  border: solid 1px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-`;
-
-const InputWrapper = styled.div`
-  margin-bottom: 30px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const StyledButton = styled(Button)`
-  width: 100%;
-  margin: 10px 0;
-`;
-
-const StyledText = styled(Text)`
-  margin: 0 30px;
-`;
 
 type Inputs = {
   username: string;
@@ -68,16 +31,23 @@ const Authorization = () => {
 
   return (
     <>
-      <Main>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          {/* <Text fontSize="4xl">Welcome!</Text> */}
+      <Flex align="center" justify="center" height="100vh" bg="gray.50">
+        <Box
+          as="form"
+          onSubmit={handleSubmit(onSubmit)}
+          boxShadow="2xl"
+          p="4"
+          rounded="lg"
+          bg="white"
+          w="400px"
+        >
           <FormControl>
-            <InputWrapper>
+            <Box mb="30px">
               <FormLabel>Name</FormLabel>
               <Input id="login" type="text" {...register("username")} />
               <FormHelperText>Enter your name</FormHelperText>
-            </InputWrapper>
-            <InputWrapper>
+            </Box>
+            <Box mb="30px">
               <FormLabel>Password</FormLabel>
               <Input
                 id="password"
@@ -85,28 +55,32 @@ const Authorization = () => {
                 {...register("password", { required: true })}
               />
               <FormHelperText>Enter password</FormHelperText>
-            </InputWrapper>
+            </Box>
           </FormControl>
-          <ButtonWrapper>
-            <StyledButton
+          <Flex direction="column" align="center">
+            <Button
+              w="100%"
+              my="10px"
               colorScheme="blue"
               type="submit"
               onClick={() => setSubmit("login")}
             >
               Login
-            </StyledButton>
-            <StyledText>or</StyledText>
-            <StyledButton
+            </Button>
+            <Text>or</Text>
+            <Button
+              w="100%"
+              my="10px"
               colorScheme="blue"
               variant="outline"
               type="submit"
               onClick={() => setSubmit("register")}
             >
               Register
-            </StyledButton>
-          </ButtonWrapper>
-        </Form>
-      </Main>
+            </Button>
+          </Flex>
+        </Box>
+      </Flex>
     </>
   );
 };

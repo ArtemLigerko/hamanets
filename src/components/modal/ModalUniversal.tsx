@@ -1,7 +1,8 @@
+import { Button } from "@chakra-ui/react";
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 
-import ToolsbarButton from "../UI/ToolsbarButton/ToolsbarButton";
+// import ToolsbarButton from "../UI/ToolsbarButton/ToolsbarButton";
 
 interface ModalProps {
   button?: React.ReactNode;
@@ -24,7 +25,8 @@ const ModalUniversal = ({
 
   return (
     <>
-      <ToolsbarButton onClick={handleShow}>{button}</ToolsbarButton>
+      {/* <ToolsbarButton onClick={handleShow}>{button}</ToolsbarButton> */}
+      <Button onClick={handleShow}>{button}</Button>
 
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>

@@ -1,3 +1,5 @@
+// import Button from "@mui/material/Button";
+
 import TransactionForm from "./modal/TransactionForm";
 import ToolsbarButton from "./UI/ToolsbarButton/ToolsbarButton";
 
@@ -14,7 +16,8 @@ const TransactionsBar = () => {
         button="Додати прибуток"
         isSpend={false}
       />
-      <ToolsbarButton>Видалити всі транзакції</ToolsbarButton>
+      <button>Видалити всі транзакції</button>
+      {/* <ToolsbarButton>Видалити всі транзакції</ToolsbarButton> */}
     </>
   );
 };
