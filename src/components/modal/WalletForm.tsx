@@ -68,8 +68,8 @@ const WalletForm = () => {
 
   return (
     <>
-      <Button onClick={onOpen} size="sm">
-        New wallet
+      <Button onClick={onOpen} size="sm" colorScheme="blue">
+        додати рахунок
       </Button>
       {/* <Button ml={4} ref={finalRef}>
         I'll receive focus on close

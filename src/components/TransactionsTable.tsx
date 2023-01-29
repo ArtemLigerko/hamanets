@@ -24,7 +24,6 @@ const TransactionsTableChakra = () => {
   const transactions = useAppSelector(
     (state) => state.transactions.transactions.docs
   );
-  console.log(transactions);
 
   const transactionsError = useAppSelector(
     (state) => state.transactions.transactions.error
@@ -34,18 +33,13 @@ const TransactionsTableChakra = () => {
     return (
       <Tr>
         <Th>Дата</Th>
-        <Th>Тип операції</Th>
         <Th>Рахунок</Th>
+        <Th>Тип операції</Th>
         <Th>Стаття</Th>
         <Th isNumeric>Сумма</Th>
       </Tr>
     );
   };
-
-  //colorScheme
-  //"whiteAlpha" | "blackAlpha" | "gray" | "red" | "orange" | "yellow" |
-  //"green" | "teal" | "blue" | "cyan" | "purple" | "pink" | "linkedin" |
-  //"facebook" | "messenger" | "whatsapp" | "twitter" | "telegram"
 
   return (
     <>
@@ -62,8 +56,8 @@ const TransactionsTableChakra = () => {
                 return (
                   <Tr key={el.id}>
                     <Td>{el.createdAt}</Td>
-                    <Td>{el.type}</Td>
                     <Td>{el.walletName}</Td>
+                    <Td>{el.type}</Td>
                     <Td>{el.category}</Td>
                     <Td isNumeric>{el.sum}</Td>
                   </Tr>
