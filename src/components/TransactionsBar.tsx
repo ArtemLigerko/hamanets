@@ -1,6 +1,6 @@
 import { Button, Stack } from "@chakra-ui/react";
 
-import TransactionFormChakra from "./modal/TransactionsForm.chakra";
+import TransactionFormChakra from "./modal/TransactionsForm";
 
 const TransactionsBar = () => {
   return (

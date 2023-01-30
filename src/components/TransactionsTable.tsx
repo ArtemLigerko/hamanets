@@ -13,6 +13,8 @@ import React, { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { transactionsActions } from "../redux/reducers/transactions";
+import { currencyFormatForTable } from "../services/currencyFormat";
+import { toLocalDate } from "../services/localDateTime";
 
 const TransactionsTableChakra = () => {
   const dispatch = useAppDispatch();
@@ -55,11 +57,11 @@ const TransactionsTableChakra = () => {
               {transactions.map((el) => {
                 return (
                   <Tr key={el.id}>
-                    <Td>{el.createdAt}</Td>
+                    <Td>{toLocalDate(el.createdAt)}</Td>
                     <Td>{el.walletName}</Td>
                     <Td>{el.type}</Td>
                     <Td>{el.category}</Td>
-                    <Td isNumeric>{el.sum}</Td>
+                    <Td isNumeric>{currencyFormatForTable(el.sum)}</Td>
                   </Tr>
                 );
               })}

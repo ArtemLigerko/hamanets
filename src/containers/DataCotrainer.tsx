@@ -1,17 +1,12 @@
-import React, { PropsWithChildren } from "react";
-import { Container } from "react-bootstrap";
-import styled from "styled-components";
-
-const StyledContainer = styled(Container)`
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-`;
+import { Flex } from "@chakra-ui/react";
+import { PropsWithChildren } from "react";
 
 const DataContainer = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <StyledContainer>{children}</StyledContainer>
+      <Flex justify="center" w="100%" p="10px">
+        {children}
+      </Flex>
     </>
   );
 };
