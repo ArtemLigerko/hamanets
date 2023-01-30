@@ -1,12 +1,4 @@
-import {
-  AlertDialog,
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 
 const ToolsContainer = ({ children }: PropsWithChildren) => {

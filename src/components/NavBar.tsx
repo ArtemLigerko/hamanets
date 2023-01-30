@@ -15,7 +15,7 @@ const NavBar = () => {
         <Breadcrumb separator="-" my="1" ml="5">
           <BreadcrumbItem>
             <BreadcrumbLink as={Link} to="/wallets">
-              <Text fontSize="2xl">Гаманці</Text>
+              <Text fontSize="2xl">Рахунки</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>
 

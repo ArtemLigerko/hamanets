@@ -10,15 +10,36 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
-const AlertDialogExample = () => {
+interface ConfirmProps {
+  actionButton: string | JSX.Element;
+  title: string;
+  body?: string;
+  okButton: string;
+  okButtonColorScheme?: string;
+  cancelButton: string;
+  handleOk: any;
+}
+
+const AlertDialogUniversal = ({
+  actionButton,
+  title,
+  body,
+  okButton,
+  okButtonColorScheme,
+  cancelButton,
+  handleOk,
+}: ConfirmProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
 
+  const handleOkAndClose = () => {
+    handleOk();
+    onClose();
+  };
+
   return (
     <>
-      <Button colorScheme="red" onClick={onOpen}>
-        Del
-      </Button>
+      <div onClick={onOpen}>{actionButton}</div>
 
       <AlertDialog
         isOpen={isOpen}
@@ -28,19 +49,21 @@ const AlertDialogExample = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              {title}
             </AlertDialogHeader>
 
-            <AlertDialogBody>
-              Are you sure? You can't undo this action afterwards.
-            </AlertDialogBody>
+            <AlertDialogBody>{body}</AlertDialogBody>
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
-                Cancel
+                {cancelButton}
               </Button>
-              <Button colorScheme="red" onClick={onClose} ml={3}>
-                Delete
+              <Button
+                colorScheme={okButtonColorScheme}
+                onClick={handleOkAndClose}
+                ml={3}
+              >
+                {okButton}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -50,4 +73,4 @@ const AlertDialogExample = () => {
   );
 };
 
-export default AlertDialogExample;
+export default AlertDialogUniversal;

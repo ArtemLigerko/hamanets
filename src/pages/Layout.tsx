@@ -25,12 +25,6 @@ const Center = styled.div`
   /* height: calc(100vh - 40px - 40px - 40px); */
 `;
 
-const Footer = styled.header`
-  background-color: #e9bd98;
-  width: 100%;
-  height: 40px;
-`;
-
 const Layout: React.FC<PropsWithChildren> = () => {
   return (
     <>
@@ -43,7 +37,6 @@ const Layout: React.FC<PropsWithChildren> = () => {
             </main>
           </Center>
         </Main>
-        <Footer>footer</Footer>
       </Window>
     </>
   );

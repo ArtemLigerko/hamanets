@@ -4,7 +4,13 @@ import { PropsWithChildren } from "react";
 const DataContainer = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <Flex justify="center" w="100%" p="10px">
+      <Flex
+        justify="center"
+        w="100%"
+        // h="100vh"
+        p="10px"
+        background="gray.100"
+      >
         {children}
       </Flex>
     </>

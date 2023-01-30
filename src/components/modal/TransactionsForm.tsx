@@ -139,7 +139,14 @@ const TransactionFormChakra = ({ title, button, isSpend }: ISpendingForm) => {
 
               <FormControl mt={4}>
                 <FormLabel>Сума</FormLabel>
-                <Input {...register("sum")} />
+                <Input
+                  {...register("sum")}
+                  // onKeyDown={(e) => {
+                  //   if (e.key === "Enter") {
+                  //     handleSubmit(onSubmit);
+                  //   }
+                  // }}
+                />
                 {errors.sum && <p>{errors?.sum.message}</p>}
               </FormControl>
             </form>

@@ -16,8 +16,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { walletsActions } from "../redux/reducers/wallets";
 import { currencyFormat } from "../services/currencyFormat";
 import { toLocalDate } from "../services/localDateTime";
-import AlertDialogExample from "./modal/AlertDialog";
-import ConfirmUniversal from "./modal/ConfirmUniversal";
+import ConfirmDialog from "./modal/ConfirmDialogUniversal";
 
 const Wallet: React.FC = () => {
   const wallets = useAppSelector((store) => store.wallets.wallets.docs);
@@ -33,12 +32,8 @@ const Wallet: React.FC = () => {
     dispatch(walletsActions.getWallets());
   };
 
-  const handleEditWallet = (id: string): void => {
-    const walletIndex = wallets.findIndex((wallet) => wallet.id === id);
-  };
-
   const actionButton = (
-    <Button>
+    <Button size="sm" p="0" color="red.500" colorScheme="whiteAlpha">
       <DeleteIcon />
     </Button>
   );
@@ -66,22 +61,22 @@ const Wallet: React.FC = () => {
                   {wallet.walletName}
                 </Heading>
 
-                <div>
-                  <ConfirmUniversal
-                    actionButton={actionButton}
-                    title="Видалення рахунку!"
-                    content="Ви впевнені у видаленні рахунку?"
-                    handleOk={() => handleDelWallet(wallet.id)}
-                  />
-                </div>
-                <AlertDialogExample />
+                <ConfirmDialog
+                  actionButton={actionButton}
+                  title="Видалення рахунку!"
+                  body="Ви впевнені? Назад повернути не можна буде!"
+                  okButton="Видалити"
+                  okButtonColorScheme="red"
+                  cancelButton="Відмінити"
+                  handleOk={() => handleDelWallet(wallet.id)}
+                />
               </CardHeader>
               <Divider color="grey" />
               <CardBody>
                 <Heading mb="6" size="lg">
                   {currencyFormat(wallet.total)}
                 </Heading>
-                <Text>{toLocalDate(wallet.createdAt)}</Text>
+                <Text pt="2">Створено: {toLocalDate(wallet.createdAt)}</Text>
               </CardBody>
             </Card>
           ))
