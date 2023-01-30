@@ -1,6 +1,4 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import $ from "jquery";
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -23,14 +21,6 @@ body {
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-
-// For transactions table
-$(document).ready(() => {
-  $("#transactions").DataTable({
-    paging: true,
-    // pagingType: "scrolling",
-  });
-});
 
 root.render(
   // <React.StrictMode>

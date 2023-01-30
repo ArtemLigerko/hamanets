@@ -53,3 +53,14 @@ export interface Pagination<T = object> {
   // nextPage?: number;
   // init?: boolean;
 }
+
+export interface IUser {
+  id: string;
+  username: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: IUser;
+}
