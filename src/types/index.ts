@@ -6,7 +6,7 @@
 // }
 // PropsWithChildren instead ChildrenProps
 
-export interface MongoArtifacts {
+export interface MongoId {
   _id: string;
 }
 
@@ -20,8 +20,9 @@ export interface User {
   };
 }
 
-export interface IWallet extends MongoArtifacts {
+export interface IWallet extends MongoId {
   id: string;
+  user_id: string;
   createdAt: string | Date;
   updatedAt: string | Date;
   walletName: string;
@@ -29,9 +30,10 @@ export interface IWallet extends MongoArtifacts {
   total: number;
 }
 
-export interface ITransaction extends MongoArtifacts {
-  id: string;
-  walletId: string | undefined;
+export interface ITransaction extends MongoId {
+  // id: string;
+  // walletId: string | undefined;
+  wallet_id: string | undefined;
   walletName: string;
   createdAt: string;
   // updatedAt: string;

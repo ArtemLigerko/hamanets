@@ -13,12 +13,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { nanoid } from "nanoid";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { walletsActions } from "../../redux/reducers/wallets";
 import { IWallet } from "../../types";
 
@@ -43,6 +42,8 @@ const WalletForm = () => {
 
   const dispatch = useAppDispatch();
 
+  const authUser = useAppSelector((store) => store.user.authUser);
+
   const {
     register,
     handleSubmit,
@@ -57,10 +58,8 @@ const WalletForm = () => {
     dispatch(
       walletsActions.createWallet({
         ...data,
-        id: nanoid(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
         total: data.initialSum,
+        user_id: authUser.id,
       })
     );
     onClose();

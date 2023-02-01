@@ -56,7 +56,7 @@ const TransactionsTableChakra = () => {
             <Tbody>
               {transactions.map((el) => {
                 return (
-                  <Tr key={el.id}>
+                  <Tr key={el._id}>
                     <Td>{toLocalDate(el.createdAt)}</Td>
                     <Td>{el.walletName}</Td>
                     <Td>{el.type}</Td>

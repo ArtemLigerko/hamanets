@@ -1,17 +1,17 @@
 import { Button, Stack } from "@chakra-ui/react";
 
-import TransactionFormChakra from "./modal/TransactionsForm";
+import TransactionForm from "./modal/TransactionsForm";
 
 const TransactionsBar = () => {
   return (
     <>
       <Stack spacing="2" direction="row" align="center">
-        <TransactionFormChakra
+        <TransactionForm
           title="Введіть витрати"
           button="додати витрати"
           isSpend
         />
-        <TransactionFormChakra
+        <TransactionForm
           title="Введіть прибуток"
           button="додати прибуток"
           isSpend={false}

@@ -44,7 +44,7 @@ const Wallet: React.FC = () => {
         {wallets.length ? (
           wallets.map((wallet) => (
             <Card
-              key={wallet.id}
+              key={wallet._id}
               w="85.6mm"
               h="53.98mm"
               m="2"

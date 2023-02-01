@@ -14,7 +14,6 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { nanoid } from "nanoid";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
@@ -34,7 +33,6 @@ interface ISpendingForm {
 const schema = yup
   .object()
   .shape({
-    // createdAt: yup.string().required("Please, enter a valid date"),
     walletName: yup.string().required("Потрібно вказати рахунок"),
     sum: yup
       .number()
@@ -43,7 +41,7 @@ const schema = yup
   })
   .required();
 
-const TransactionFormChakra = ({ title, button, isSpend }: ISpendingForm) => {
+const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = useRef(null);
@@ -52,10 +50,10 @@ const TransactionFormChakra = ({ title, button, isSpend }: ISpendingForm) => {
   const dispatch = useAppDispatch();
 
   const wallets = useAppSelector((store) => store.wallets.wallets.docs);
-  const transactions = useAppSelector((store) => store.transactions);
 
-  const currentWalletId = (wallet: string) => {
-    return wallets.find((item) => wallet === item.walletName)?.id;
+  const currentWalletId = (walletName: string) => {
+    const targetWallet = wallets.find((item) => walletName === item.walletName);
+    return targetWallet?._id;
   };
 
   const {
@@ -75,8 +73,7 @@ const TransactionFormChakra = ({ title, button, isSpend }: ISpendingForm) => {
     dispatch(
       transactionsActions.createTransaction({
         ...data,
-        id: nanoid(),
-        walletId: walletId,
+        wallet_id: walletId,
         walletName: data.walletName,
         type: isSpend ? "витрати" : "прибуток",
         sum: transactionSum,
@@ -114,7 +111,9 @@ const TransactionFormChakra = ({ title, button, isSpend }: ISpendingForm) => {
                 <FormLabel>Рахунок</FormLabel>
                 <Select {...register("walletName")}>
                   {wallets.map((wallet: any) => {
-                    return <option key={wallet.id}>{wallet.walletName}</option>;
+                    return (
+                      <option key={wallet._id}>{wallet.walletName}</option>
+                    );
                   })}
                 </Select>
                 {errors.walletName && <p>{errors?.walletName.message}</p>}
@@ -163,4 +162,4 @@ const TransactionFormChakra = ({ title, button, isSpend }: ISpendingForm) => {
   );
 };
 
-export default TransactionFormChakra;
+export default TransactionForm;

@@ -9,8 +9,10 @@ import {
   Box,
   Flex,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+
+import { useAppDispatch } from "../redux/hooks";
+import { userActions } from "../redux/reducers/user";
 
 const ButtonStyle = {
   width: "100%",
@@ -23,23 +25,29 @@ type Inputs = {
 };
 
 const Authorization = () => {
-  const [submit, setSubmit] = useState("login");
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  // console.log(watch("username")); // watch input value by passing the name of it
+  const dispatch = useAppDispatch();
+
+  const onSubmitLogin: SubmitHandler<Inputs> = (data) => {
+    dispatch(userActions.login(data));
+  };
+
+  const onSubmitRegister: SubmitHandler<Inputs> = (data) => {
+    dispatch(userActions.registration(data));
+  };
 
   return (
     <>
-      <Flex align="center" justify="center" height="100vh" bg="gray.50">
+      <Flex align="center" justify="center" w="100%" h="100vh" bg="gray.50">
         <Box
           as="form"
-          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={handleSubmit(onSubmit)}
           boxShadow="2xl"
           p="4"
           rounded="lg"
@@ -67,7 +75,7 @@ const Authorization = () => {
               sx={ButtonStyle}
               colorScheme="blue"
               type="submit"
-              onClick={() => setSubmit("login")}
+              onClick={handleSubmit(onSubmitLogin)}
             >
               Login
             </Button>
@@ -77,7 +85,7 @@ const Authorization = () => {
               variant="outline"
               colorScheme="blue"
               type="submit"
-              onClick={() => setSubmit("register")}
+              onClick={handleSubmit(onSubmitRegister)}
             >
               Register
             </Button>

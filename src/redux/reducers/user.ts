@@ -9,18 +9,18 @@ import {
 import { AuthResponse } from "../../types";
 
 interface AuthUserInitialState {
-  email: string;
-  isActivated: false;
   id: string;
+  _id: string;
   isAuth: boolean;
+  username: string;
   isLoading?: boolean;
   error?: string | Error;
 }
 const authUserInitialState: AuthUserInitialState = {
-  email: "",
-  isActivated: false,
   id: "",
+  _id: "",
   isAuth: false,
+  username: "",
   isLoading: false,
   error: undefined,
 };
@@ -37,25 +37,20 @@ const userInitialState: UserStore = {
 interface RegistrationResponse {}
 interface RegistrationRequest {
   username: string;
-  email: string;
   password: string;
 }
 const registration = createAsyncThunk<
   RegistrationResponse,
   RegistrationRequest
->(
-  "auth/registration",
-
-  async (body) => {
-    const { username, password } = body;
-    const response = await registrationService(username, password);
-    console.log("Registration:");
-    console.log(response);
-    console.log(response.data.user);
-    localStorage.setItem("token", response.data.accessToken);
-    return response.data.user;
-  }
-);
+>("auth/registration", async (body) => {
+  const { username, password } = body;
+  const response = await registrationService(username, password);
+  console.log("Registration:");
+  console.log(response);
+  console.log(response.data.user);
+  localStorage.setItem("token", response.data.accessToken);
+  return response.data.user;
+});
 
 interface LoginResponse {}
 interface LoginRequest {
@@ -68,7 +63,7 @@ const login = createAsyncThunk<LoginResponse, LoginRequest>(
     const { username, password } = body;
     const response = await loginService(username, password);
     console.log("Login:");
-    console.log(response);
+    console.log(response.data.user);
     // console.log(response.data.user);
     localStorage.setItem("token", response.data.accessToken);
     return response.data.user;

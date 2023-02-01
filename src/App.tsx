@@ -10,8 +10,11 @@ import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import Authorization from "./pages/Authorization";
 import Layout from "./pages/Layout";
+import { useAppSelector } from "./redux/hooks";
 
 const App: React.FC = () => {
+  const isAuth = useAppSelector((store) => store.user.authUser.isAuth);
+
   return (
     <Flex
       as="main"
@@ -22,9 +25,9 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<Authorization />} /> */}
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={isAuth ? <Layout /> : <Authorization />}>
             <Route
-              path="/wallets"
+              path="/"
               element={
                 <>
                   <ToolsContainer>
