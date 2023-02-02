@@ -20,6 +20,7 @@ import ConfirmDialog from "./modal/ConfirmDialogUniversal";
 
 const Wallet: React.FC = () => {
   const wallets = useAppSelector((store) => store.wallets.wallets.docs);
+  const authUserId = useAppSelector((store) => store.user.authUser.id);
 
   const dispatch = useAppDispatch();
 

@@ -1,11 +1,3 @@
-// import React from "react";
-
-// export interface ChildrenProps {
-// children?: JSX.Element | JSX.Element[] | string | string[];
-// children?: React.ReactNode;
-// }
-// PropsWithChildren instead ChildrenProps
-
 export interface MongoId {
   _id: string;
 }
@@ -31,12 +23,10 @@ export interface IWallet extends MongoId {
 }
 
 export interface ITransaction extends MongoId {
-  // id: string;
-  // walletId: string | undefined;
   wallet_id: string | undefined;
+  user_id: string | undefined;
   walletName: string;
   createdAt: string;
-  // updatedAt: string;
   type: string;
   category: string;
   sum: number;

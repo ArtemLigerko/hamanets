@@ -50,6 +50,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   const dispatch = useAppDispatch();
 
   const wallets = useAppSelector((store) => store.wallets.wallets.docs);
+  const authUser = useAppSelector((store) => store.user.authUser);
 
   const currentWalletId = (walletName: string) => {
     const targetWallet = wallets.find((item) => walletName === item.walletName);
@@ -74,6 +75,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
       transactionsActions.createTransaction({
         ...data,
         wallet_id: walletId,
+        user_id: authUser.id,
         walletName: data.walletName,
         type: isSpend ? "витрати" : "прибуток",
         sum: transactionSum,

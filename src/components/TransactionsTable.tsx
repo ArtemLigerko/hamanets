@@ -19,6 +19,8 @@ import { toLocalDate } from "../services/localDateTime";
 const TransactionsTableChakra = () => {
   const dispatch = useAppDispatch();
 
+  const authUserId = useAppSelector((store) => store.user.authUser.id);
+
   useEffect(() => {
     dispatch(transactionsActions.getTransactions());
   }, []);

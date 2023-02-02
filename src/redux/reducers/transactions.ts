@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import instance from "../../services/api";
-import { LE, ITransaction, Pagination } from "../../types";
+import { LE, ITransaction, Pagination, MongoId } from "../../types";
 
 const initialState: LE<Pagination<ITransaction>> = {
   docs: [],
@@ -21,14 +21,6 @@ interface TransactionsStore {
 const transactionsInitialState: TransactionsStore = {
   transactions: initialState,
 };
-
-// const transactionsInitialState: TransactionsStore = {
-//   list: {
-//     docs: [],
-//     isLoading: false,
-//     error: undefined,
-//   },
-// };
 
 const createTransaction = createAsyncThunk<ITransaction, ITransaction>(
   "transaction/create",

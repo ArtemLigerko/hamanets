@@ -41,6 +41,7 @@ const createWallet = createAsyncThunk<IWallet, IWallet>(
 
 const getWallets = createAsyncThunk<IWallet[]>("wallets/get", async () => {
   const response = await instance.get("api/wallets");
+  console.log(response);
   return response.data;
 });
 
