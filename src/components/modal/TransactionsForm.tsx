@@ -67,6 +67,7 @@ const TransactionForm = ({ title, button, isSpend }: ISpendingForm) => {
   });
 
   const onSubmit: SubmitHandler<ITransaction> = (data) => {
+    console.log(data);
     const walletId = currentWalletId(data.walletName);
     const transactionSum =
       Math.round((isSpend ? -data.sum : +data.sum) * 100) / 100;

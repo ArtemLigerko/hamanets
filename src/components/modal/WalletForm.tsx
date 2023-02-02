@@ -42,6 +42,7 @@ const WalletForm = () => {
 
   const dispatch = useAppDispatch();
 
+  const wallets = useAppSelector((store) => store.wallets.wallets.docs);
   const authUser = useAppSelector((store) => store.user.authUser);
 
   const {
@@ -55,13 +56,22 @@ const WalletForm = () => {
 
   const onSubmit: SubmitHandler<IWallet> = (data) => {
     console.log(data);
-    dispatch(
-      walletsActions.createWallet({
-        ...data,
-        total: data.initialSum,
-        user_id: authUser.id,
-      })
+    const checkWallet = wallets.find(
+      (wallet) => wallet.walletName === data.walletName
     );
+    if (checkWallet) {
+      console.log(
+        "Choose another name, the wallet with the same name already exist"
+      );
+    } else {
+      dispatch(
+        walletsActions.createWallet({
+          ...data,
+          total: data.initialSum,
+          user_id: authUser.id,
+        })
+      );
+    }
     onClose();
   };
 
