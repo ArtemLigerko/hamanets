@@ -69,7 +69,7 @@ const Wallet: React.FC = () => {
                   okButton="Видалити"
                   okButtonColorScheme="red"
                   cancelButton="Відмінити"
-                  handleOk={() => handleDelWallet(wallet.id)}
+                  handleOk={() => handleDelWallet(wallet._id)}
                 />
               </CardHeader>
               <Divider color="grey" />
