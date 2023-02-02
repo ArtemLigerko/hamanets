@@ -1,19 +1,10 @@
-export interface MongoId {
+export interface IUser {
   _id: string;
-}
-
-export interface User {
   username: string;
-  id: string;
-  capital: {
-    wallets: IWallet[];
-    transactions: ITransaction[];
-    total: number;
-  };
 }
 
-export interface IWallet extends MongoId {
-  id: string;
+export interface IWallet {
+  _id: string;
   user_id: string;
   createdAt: string | Date;
   updatedAt: string | Date;
@@ -22,7 +13,8 @@ export interface IWallet extends MongoId {
   total: number;
 }
 
-export interface ITransaction extends MongoId {
+export interface ITransaction {
+  _id: string;
   wallet_id: string | undefined;
   user_id: string | undefined;
   walletName: string;
@@ -30,25 +22,6 @@ export interface ITransaction extends MongoId {
   type: string;
   category: string;
   sum: number;
-}
-
-export type LE<T> = T & {
-  isLoading?: boolean;
-  error?: string | Error;
-};
-
-export interface Pagination<T = object> {
-  docs: Array<T>;
-  // limit: number;
-  // hasNextPage?: boolean;
-  // page: number;
-  // nextPage?: number;
-  // init?: boolean;
-}
-
-export interface IUser {
-  id: string;
-  username: string;
 }
 
 export interface AuthResponse {

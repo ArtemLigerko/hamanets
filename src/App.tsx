@@ -24,7 +24,6 @@ const App: React.FC = () => {
     >
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Authorization />} /> */}
           <Route path="/" element={isAuth ? <Layout /> : <Authorization />}>
             <Route
               path="/"

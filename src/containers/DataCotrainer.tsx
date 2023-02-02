@@ -6,10 +6,11 @@ const DataContainer = ({ children }: PropsWithChildren) => {
     <>
       <Flex
         justify="center"
+        align="flex-start"
         w="100%"
-        // h="100vh"
+        h="100vh"
         p="10px"
-        background="gray.100"
+        // background="gray.100"
       >
         {children}
       </Flex>

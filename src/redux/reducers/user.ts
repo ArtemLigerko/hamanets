@@ -5,12 +5,11 @@ import {
   loginService,
   logoutService,
   registrationService,
-} from "../../services/AuthService";
+} from "../../services/auth.service";
 import { AuthResponse } from "../../types";
 
 interface AuthUserInitialState {
   id: string;
-  _id: string;
   isAuth: boolean;
   username: string;
   isLoading?: boolean;
@@ -18,7 +17,6 @@ interface AuthUserInitialState {
 }
 const authUserInitialState: AuthUserInitialState = {
   id: "",
-  _id: "",
   isAuth: false,
   username: "",
   isLoading: false,
@@ -45,9 +43,6 @@ const registration = createAsyncThunk<
 >("auth/registration", async (body) => {
   const { username, password } = body;
   const response = await registrationService(username, password);
-  console.log("Registration:");
-  console.log(response);
-  console.log(response.data.user);
   localStorage.setItem("token", response.data.accessToken);
   return response.data.user;
 });
@@ -62,9 +57,6 @@ const login = createAsyncThunk<LoginResponse, LoginRequest>(
   async (body) => {
     const { username, password } = body;
     const response = await loginService(username, password);
-    console.log("Login:");
-    console.log(response.data.user);
-    // console.log(response.data.user);
     localStorage.setItem("token", response.data.accessToken);
     return response.data.user;
   }
@@ -72,8 +64,6 @@ const login = createAsyncThunk<LoginResponse, LoginRequest>(
 
 const logout = createAsyncThunk("auth/logout", async () => {
   const response = await logoutService();
-  console.log("Logout:");
-  console.log(response);
   localStorage.removeItem("token");
 });
 
@@ -88,8 +78,6 @@ const checkAuth = createAsyncThunk<CheckAuthResponse>(
         withCredentials: true,
       }
     );
-    console.log("Check auth:");
-    console.log(response.data.user);
     localStorage.setItem("token", response.data.accessToken);
     return response.data.user;
   }
@@ -108,8 +96,6 @@ const userSlice = createSlice({
       store.authUser.error = undefined;
       store.authUser.isAuth = true;
       store.authUser = { ...store.authUser, ...action.payload };
-      console.log("Registration result:");
-      console.log(store.authUser);
     });
     builder.addCase(registration.rejected, (store) => {
       store.authUser.isLoading = false;
@@ -125,8 +111,6 @@ const userSlice = createSlice({
       store.authUser.error = undefined;
       store.authUser.isAuth = true;
       store.authUser = { ...store.authUser, ...action.payload };
-      console.log("Login result:");
-      console.log(store.authUser);
     });
     builder.addCase(login.rejected, (store) => {
       store.authUser.isLoading = false;

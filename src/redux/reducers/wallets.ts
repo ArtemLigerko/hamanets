@@ -1,39 +1,35 @@
 import {
   createAsyncThunk,
   createSlice,
-  current,
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 
 import instance from "../../services/api";
-import { LE, IWallet, Pagination } from "../../types";
+import { IWallet } from "../../types";
 
-const initialState: LE<Pagination<IWallet>> = {
+interface InitialState<T = object> {
+  docs: Array<T>;
+  isLoading?: boolean;
+  error?: string | Error;
+}
+
+const initialState: InitialState<IWallet> = {
   docs: [],
   isLoading: false,
   error: undefined,
 };
 
 interface WalletsStore {
-  wallets: LE<Pagination<IWallet>>;
+  wallets: InitialState<IWallet>;
 }
 
 const walletsInitialState: WalletsStore = {
   wallets: initialState,
 };
 
-// const walletsInitialState: WalletsStore = {
-//   list: {
-//     docs: [],
-//     isLoading: false,
-//     error: undefined,
-//   },
-// };
-
 const createWallet = createAsyncThunk<IWallet, IWallet>(
   "wallet/create",
   async (body) => {
-    console.log(body);
     const response = await instance.post("api/wallets", body);
     return response.data;
   }
@@ -41,11 +37,10 @@ const createWallet = createAsyncThunk<IWallet, IWallet>(
 
 const getWallets = createAsyncThunk<IWallet[]>("wallets/get", async () => {
   const response = await instance.get("api/wallets");
-  console.log(response);
   return response.data;
 });
 
-const deleteWallets = createAsyncThunk<Pagination<IWallet>, string>(
+const deleteWallets = createAsyncThunk<InitialState<IWallet>, string>(
   "wallets/del",
   async (id) => {
     const response = await instance.delete(`api/wallets/${id}`);
@@ -58,16 +53,16 @@ interface AddTransactionSumRequest {
   transactionSum: number;
 }
 
-const addTransactionSum = createAsyncThunk<
-  Pagination<IWallet>,
-  AddTransactionSumRequest
->("wallets/addTransactionSum", async ({ walletId, transactionSum }) => {
-  const response = await instance.put(`api/wallets/`, {
-    id: walletId,
-    total: transactionSum,
-  });
-  return response.data;
-});
+const addTransactionSum = createAsyncThunk<any, AddTransactionSumRequest>(
+  "wallets/addTransactionSum",
+  async ({ walletId, transactionSum }) => {
+    const response = await instance.put(`api/wallets/`, {
+      id: walletId,
+      total: transactionSum,
+    });
+    return response.data;
+  }
+);
 
 const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
   {
@@ -80,13 +75,7 @@ const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
       });
       builder.addCase(createWallet.fulfilled, (state, { payload }) => {
         state.wallets.isLoading = false;
-
-        console.log("creating wallets...");
-        console.log(payload);
-
-        console.log("adding created wallets to state...");
         state.wallets.docs.push(payload);
-        console.log(current(state));
       });
       builder.addCase(createWallet.rejected, (state) => {
         state.wallets.isLoading = false;
@@ -98,12 +87,8 @@ const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
       });
       builder.addCase(getWallets.fulfilled, (state, { payload }) => {
         state.wallets.isLoading = false;
-        console.log("getting wallets from server...");
-        console.log(payload);
 
-        console.log("writing wallets to state...");
         state.wallets.docs = payload;
-        console.log(current(state));
       });
       builder.addCase(getWallets.rejected, (state) => {
         state.wallets.isLoading = false;
@@ -115,9 +100,6 @@ const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
       });
       builder.addCase(deleteWallets.fulfilled, (state, { payload }) => {
         state.wallets.isLoading = false;
-        console.log("deleting wallets from server...");
-        console.log(payload);
-        console.log(current(state));
       });
       builder.addCase(deleteWallets.rejected, (state) => {
         state.wallets.isLoading = false;
@@ -129,13 +111,6 @@ const walletsSlice = createSlice<WalletsStore, SliceCaseReducers<WalletsStore>>(
       });
       builder.addCase(addTransactionSum.fulfilled, (state, { payload }) => {
         state.wallets.isLoading = false;
-
-        // console.log("creating wallets...");
-        // console.log(payload);
-
-        // console.log("adding created wallets to state...");
-        // state.wallets.docs.push(payload);
-        // console.log(current(state));
       });
       builder.addCase(addTransactionSum.rejected, (state) => {
         state.wallets.isLoading = false;

@@ -9,7 +9,7 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { transactionsActions } from "../redux/reducers/transactions";
@@ -18,8 +18,6 @@ import { toLocalDate } from "../services/localDateTime";
 
 const TransactionsTableChakra = () => {
   const dispatch = useAppDispatch();
-
-  const authUserId = useAppSelector((store) => store.user.authUser.id);
 
   useEffect(() => {
     dispatch(transactionsActions.getTransactions());
@@ -45,35 +43,49 @@ const TransactionsTableChakra = () => {
     );
   };
 
+  // const total = transactions.reduce((a, b): any => {
+  //   return a.sum + b.sum;
+  // });
+  // console.log(total);
+
   return (
     <>
       <TableContainer>
-        <TableContainer>
-          <Table variant="striped" colorScheme="facebook" size="sm">
-            <TableCaption>TableCaption</TableCaption>
-            <Thead>
-              <TableHead />
-            </Thead>
+        <Table variant="striped" colorScheme="facebook" size="sm">
+          {/* <TableCaption>--- end ---</TableCaption> */}
+          <Thead>
+            <TableHead />
+          </Thead>
 
-            <Tbody>
-              {transactions.map((el) => {
-                return (
-                  <Tr key={el._id}>
-                    <Td>{toLocalDate(el.createdAt)}</Td>
-                    <Td>{el.walletName}</Td>
-                    <Td>{el.type}</Td>
-                    <Td>{el.category}</Td>
-                    <Td isNumeric>{currencyFormatForTable(el.sum)}</Td>
-                  </Tr>
-                );
-              })}
-            </Tbody>
+          <Tbody>
+            {transactions.map((el) => {
+              return (
+                <Tr key={el._id}>
+                  <Td>{toLocalDate(el.createdAt)}</Td>
+                  <Td>{el.walletName}</Td>
+                  <Td>{el.type}</Td>
+                  <Td>{el.category}</Td>
+                  <Td isNumeric>{currencyFormatForTable(el.sum)}</Td>
+                </Tr>
+              );
+            })}
+            <Tr>
+              <Td>
+                <b>Всього:</b>
+              </Td>
+              <Td>{}</Td>
+              <Td>{}</Td>
+              <Td>{}</Td>
+              <Td isNumeric>
+                <b>{"total"}</b>
+              </Td>
+            </Tr>
+          </Tbody>
 
-            <Tfoot>
-              <TableHead />
-            </Tfoot>
-          </Table>
-        </TableContainer>
+          <Tfoot>
+            <TableHead />
+          </Tfoot>
+        </Table>
       </TableContainer>
     </>
   );

@@ -1,21 +1,26 @@
 import {
   createAsyncThunk,
   createSlice,
-  current,
   SliceCaseReducers,
 } from "@reduxjs/toolkit";
 
 import instance from "../../services/api";
-import { LE, ITransaction, Pagination, MongoId } from "../../types";
+import { ITransaction } from "../../types";
 
-const initialState: LE<Pagination<ITransaction>> = {
+interface InitialState<T = object> {
+  docs: Array<T>;
+  isLoading?: boolean;
+  error?: string | Error;
+}
+
+const initialState: InitialState<ITransaction> = {
   docs: [],
   isLoading: false,
   error: undefined,
 };
 
 interface TransactionsStore {
-  transactions: LE<Pagination<ITransaction>>;
+  transactions: InitialState<ITransaction>;
 }
 
 const transactionsInitialState: TransactionsStore = {
@@ -51,13 +56,7 @@ const transactionsSlice = createSlice<
     });
     builder.addCase(createTransaction.fulfilled, (state, { payload }) => {
       state.transactions.isLoading = false;
-
-      // console.log("creating transactions...");
-      // console.log(payload);
-
-      // console.log("adding created transactions to state...");
       state.transactions.docs.push(payload);
-      // console.log(current(state));
     });
     builder.addCase(createTransaction.rejected, (state) => {
       state.transactions.isLoading = false;
@@ -69,12 +68,7 @@ const transactionsSlice = createSlice<
     });
     builder.addCase(getTransactions.fulfilled, (state, { payload }) => {
       state.transactions.isLoading = false;
-      console.log("getting transactions from server...");
-      console.log(payload);
-
-      console.log("writing transactions to state...");
       state.transactions.docs = payload;
-      console.log(current(state));
     });
     builder.addCase(getTransactions.rejected, (state) => {
       state.transactions.isLoading = false;
