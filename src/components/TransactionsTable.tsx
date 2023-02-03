@@ -8,6 +8,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -84,6 +85,7 @@ const TransactionsTableChakra = () => {
 
           <Tfoot>
             <TableHead />
+            <Text>Total</Text>
           </Tfoot>
         </Table>
       </TableContainer>

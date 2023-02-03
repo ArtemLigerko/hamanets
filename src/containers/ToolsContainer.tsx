@@ -9,6 +9,10 @@ const ToolsContainer = ({ children }: PropsWithChildren) => {
       borderColor="gray.200"
       bg="blue.100"
       py="1"
+      position="fixed"
+      top="10"
+      w="100%"
+      zIndex="1"
     >
       <Text mx="3">Toolsbar</Text>
       <Box>{children}</Box>

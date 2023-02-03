@@ -9,7 +9,7 @@ const DataContainer = ({ children }: PropsWithChildren) => {
         align="flex-start"
         w="100%"
         h="100vh"
-        p="10px"
+        pt="100px"
         // background="gray.100"
       >
         {children}

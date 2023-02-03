@@ -16,12 +16,7 @@ const App: React.FC = () => {
   const isAuth = useAppSelector((store) => store.user.authUser.isAuth);
 
   return (
-    <Flex
-      as="main"
-      w="100%"
-      h="100vh"
-      // background="gray"
-    >
+    <Flex as="main" w="100%" h="100vh">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={isAuth ? <Layout /> : <Authorization />}>
