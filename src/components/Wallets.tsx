@@ -1,4 +1,4 @@
-import { DeleteIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Button,
   Card,
@@ -9,6 +9,11 @@ import {
   Text,
   Flex,
   Divider,
+  Menu,
+  MenuButton,
+  MenuList,
+  IconButton,
+  MenuItem,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 
@@ -33,9 +38,9 @@ const Wallet: React.FC = () => {
   };
 
   const actionButton = (
-    <Button size="sm" p="0" color="gray.600" colorScheme="whiteAlpha">
-      <DeleteIcon />
-    </Button>
+    <MenuItem icon={<DeleteIcon />} color="gray.600">
+      Видалити рахунок
+    </MenuItem>
   );
 
   return (
@@ -57,7 +62,6 @@ const Wallet: React.FC = () => {
               border="1px"
               borderColor="gray.200"
               boxShadow="xl"
-              // bg="blue.50"
             >
               <CardHeader
                 display="flex"
@@ -69,15 +73,25 @@ const Wallet: React.FC = () => {
                   {wallet.walletName}
                 </Heading>
 
-                <ConfirmDialog
-                  actionButton={actionButton}
-                  title="Видалення рахунку!"
-                  body="Ви впевнені? Назад повернути не можна буде!"
-                  okButton="Видалити"
-                  okButtonColorScheme="red"
-                  cancelButton="Відмінити"
-                  handleOk={() => handleDelWallet(wallet._id)}
-                />
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={<HamburgerIcon />}
+                    variant="outline"
+                  />
+                  <MenuList>
+                    <ConfirmDialog
+                      actionButton={actionButton}
+                      title="Видалення рахунку!"
+                      body="Ви впевнені? Назад повернути не можна буде!"
+                      okButton="Видалити"
+                      okButtonColorScheme="red"
+                      cancelButton="Відмінити"
+                      handleOk={() => handleDelWallet(wallet._id)}
+                    />
+                  </MenuList>
+                </Menu>
               </CardHeader>
               <Divider color="grey" />
               <CardBody>

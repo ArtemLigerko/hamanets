@@ -6,10 +6,6 @@ import { createGlobalStyle } from "styled-components";
 
 import App from "./App";
 import { store, persistor } from "./redux/store";
-// import "reset.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "datatables.net";
-import "datatables.net-bs5";
 
 const GlobalStyles = createGlobalStyle`
 body {

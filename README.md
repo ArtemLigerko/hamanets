@@ -1,9 +1,14 @@
 # Hamanets
 
-## Plan:
+Demo project for training purposes.
 
-- Errors handler;
-- Server errors handler;
-- JWT authorisation;
-- population;
-- pagination;
+## Tech stack
+
+- react
+- redux
+- typescript
+- react-chakra-ui
+- react-hook-forms
+- react-router-dom
+- styled-components
+- PWA

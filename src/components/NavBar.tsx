@@ -55,24 +55,23 @@ const NavBar = () => {
         color="white"
         m="0"
         p="0"
-        // border="0"
       >
         <Breadcrumb as="div" separator="" ml="5" textDecoration="none">
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink as={Link} to="/">
-              <Text sx={navLink}>Рахунки</Text>
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/" sx={navLink}>
+              <Text>Рахунки</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/transactions">
-              <Text sx={navLink}>Транзакції</Text>
+            <BreadcrumbLink as={Link} to="/transactions" sx={navLink}>
+              <Text>Транзакції</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/report">
-              <Text sx={navLink}>Звіти</Text>
+            <BreadcrumbLink as={Link} to="/report" sx={navLink}>
+              <Text>Звіти</Text>
             </BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
@@ -80,10 +79,13 @@ const NavBar = () => {
           <Text mr="5">{authUser}</Text>
           <Button
             as={Link}
+            sx={navLink}
             to="/"
-            size="sm"
+            // size="sm"
             mr="8"
-            colorScheme="blue"
+            bg=""
+            borderRadius="0"
+            // colorScheme="blue"
             onClick={handleLogout}
           >
             Logout
