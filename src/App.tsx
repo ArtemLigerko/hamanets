@@ -2,11 +2,11 @@ import { Flex } from "@chakra-ui/react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import NotFound404 from "./components/NotFound404";
+import Reports from "./components/Reports";
 import TransactionsBar from "./components/TransactionsBar";
 import TransactionsTableChakra from "./components/TransactionsTable";
 import Wallets from "./components/Wallets";
 import WalletBar from "./components/WalletsBar";
-import DataContainer from "./containers/DataCotrainer";
 import ToolsContainer from "./containers/ToolsContainer";
 import Authorization from "./pages/Authorization";
 import Layout from "./pages/Layout";
@@ -27,9 +27,7 @@ const App: React.FC = () => {
                   <ToolsContainer>
                     <WalletBar />
                   </ToolsContainer>
-                  <DataContainer>
-                    <Wallets />
-                  </DataContainer>
+                  <Wallets />
                 </>
               }
             />
@@ -45,14 +43,7 @@ const App: React.FC = () => {
                 </>
               }
             />
-            <Route
-              path="*"
-              element={
-                <DataContainer>
-                  <NotFound404 />
-                </DataContainer>
-              }
-            />
+            <Route path="*" element={<Reports />} />
           </Route>
         </Routes>
       </BrowserRouter>

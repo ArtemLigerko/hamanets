@@ -1,13 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-const NotFound404 = () => {
+const Reports = () => {
   return (
     <>
       <Flex mt="90px" justify="center">
-        <Text>Not Found 404</Text>
+        <Text>In developing...</Text>
       </Flex>
     </>
   );
 };
 
-export default NotFound404;
+export default Reports;

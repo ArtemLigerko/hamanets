@@ -6,9 +6,7 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
-  Text,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -28,9 +26,9 @@ const TransactionsTableChakra = () => {
     (state) => state.transactions.transactions.docs
   );
 
-  const transactionsError = useAppSelector(
-    (state) => state.transactions.transactions.error
-  );
+  // const transactionsError = useAppSelector(
+  //   (state) => state.transactions.transactions.error
+  // );
 
   const TableHead = () => {
     return (
@@ -44,16 +42,10 @@ const TransactionsTableChakra = () => {
     );
   };
 
-  // const total = transactions.reduce((a, b): any => {
-  //   return a.sum + b.sum;
-  // });
-  // console.log(total);
-
   return (
     <>
-      <TableContainer>
+      <TableContainer w="100%" mt="90px">
         <Table variant="striped" colorScheme="facebook" size="sm">
-          {/* <TableCaption>--- end ---</TableCaption> */}
           <Thead>
             <TableHead />
           </Thead>
@@ -70,22 +62,10 @@ const TransactionsTableChakra = () => {
                 </Tr>
               );
             })}
-            <Tr>
-              <Td>
-                <b>Всього:</b>
-              </Td>
-              <Td>{}</Td>
-              <Td>{}</Td>
-              <Td>{}</Td>
-              <Td isNumeric>
-                <b>{"total"}</b>
-              </Td>
-            </Tr>
           </Tbody>
 
           <Tfoot>
             <TableHead />
-            <Text>Total</Text>
           </Tfoot>
         </Table>
       </TableContainer>

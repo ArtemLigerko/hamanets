@@ -45,13 +45,7 @@ const Wallet: React.FC = () => {
 
   return (
     <>
-      <Flex
-        justify="center"
-        align="flex-start"
-        flexWrap="wrap"
-        w="100%"
-        h="100vh"
-      >
+      <Flex justify="center" flexWrap="wrap" w="100%" mt="90px">
         {wallets.length ? (
           wallets.map((wallet) => (
             <Card
