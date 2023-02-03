@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/hamanets/static/js/main.4b8a988b.js",
+    "index.html": "/hamanets/index.html",
+    "main.4b8a988b.js.map": "/hamanets/static/js/main.4b8a988b.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.4b8a988b.js"
+  ]
+}
